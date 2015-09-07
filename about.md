@@ -6,7 +6,7 @@ permalink: /about/
 
 I welcome you on my blog! 
 
-$$ A^B = C $$
+\\( 1/x^{2} \\)
 
 Here I share my ideas and experiences on the quest to understand how intelligence work, as well as some Python code to support my findings. Feel free to click around! 
 
