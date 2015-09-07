@@ -4,14 +4,7 @@ title: Hello there, stranger of the internet.
 permalink: /about/
 ---
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
-
 I welcome you on my blog! 
-
-<script>
-  document.getElementById("demo").innerHTML = "Hello JavaScript!";
-</script>
 
 Here I share my ideas and experiences on the quest to understand how intelligence work, as well as some Python code to support my findings. Feel free to click around! 
 
