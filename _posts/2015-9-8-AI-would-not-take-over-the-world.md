@@ -18,4 +18,4 @@ One can argue that constraints can be imposed such that rewriting of the objecti
 
 After rewriting of its objective to return numerical infinity, actions of AI would be determined only by the tie breaking strategy. Thus for random tie breaking AI would simply act in random nonsensical way. For breaking based on "least effort" AI would simply remain silently in the state of infinite bliss. One can even imagine tie breaking aimed at humanity annihilation (but who would use such tie breaking really :D ). 
 
-Thus under the assumption that AI agent can modify its objective it does not seem likely that uncontrolled AI would pose any threat to humanity. As AI and its objective function need to exchange information between themselves, it does not seem likely that it is possible to separate them completely. 
+As AI and its objective function need to exchange information between themselves, it does not seem likely that it is possible to separate them completely. Thus under the assumption that AI agent can modify its objective it does not seem likely that uncontrolled AI would pose a threat to humanity. 
