@@ -4,7 +4,7 @@ title: Hello there, stranger of the internet.
 permalink: /about/
 ---
 
-I welcome you on my blog! 
+I welcome you on my blog!
 
 Here I share my ideas and experiences on the quest to understand how intelligence work, as well as some Python code to support my findings. Feel free to click around!
 
