@@ -4,7 +4,7 @@ title: Why AI would not take over the world
 ---
 
 The fear of AI taking over the world is common in media and over the internet.
-In this post I would like to shake such fears. 
+In this post I argue that under common assumptions self improving AI is more likely to end up in a state of vegetable than to enslave humanity.
 
 Lets first decide for ourselves what AI is. First lets assume that AI has a certain finite valued objective function, specific for the purpose of this AI. Such cost function assign some numerical value which characterizes "goodness" of certain action intelligent agent can make.
 For example, imagine an AI whose purpose is to collect stamps. Then its objective function could be the expected amount of steps collected when a certain set of actions is performed.
