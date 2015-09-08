@@ -4,6 +4,10 @@ title: Hello there, stranger of the internet.
 permalink: /about/
 ---
 
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+</script>
+
 I welcome you on my blog! 
 
 Here I share my ideas and experiences on the quest to understand how intelligence work, as well as some Python code to support my findings. Feel free to click around! 
