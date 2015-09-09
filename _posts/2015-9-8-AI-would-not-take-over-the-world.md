@@ -3,7 +3,7 @@ layout: post
 title: Why AI would not take over the world
 ---
 
-there is a common notion in the media and over the internet of scary scenario when self improving AI starts to replicate itself and takes over the world.
+There is a common notion in the media and over the internet of a scary scenario when self improving AI starts to replicate itself and takes over the world.
 In this post I would like to address the core of such views by showing that under common assumptions self improving AI is more likely to end up in a state of vegetable than to enslave humanity.
 
 Lets first decide for ourselves what AI is by making a set of common assumptions. First lets assume that initially AI has a certain finite valued objective function, specific for the purpose of this AI. Such cost function assign some numerical value which characterizes "goodness" of certain action intelligent agent can make.
