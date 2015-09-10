@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Local minimum\: not a problem for Deep Learning
+title: Local minimum&#58; not a problem for Deep Learning
 ---
 
 A local minimum problem, associated with training of neural networks, is frequently viewed as a their serous drawback. In this post I argue why with proper initialization and popular choices of neuron types this problem does not affect much quality of local minimum.
