@@ -38,7 +38,7 @@ Perturbation theory: something in between two extreme cases. Adding new neuron i
 
 How uniform improvements are? Experimental results for random neurons!
 
-All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be.
+All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
 
 ### Additional layers to correct errors
 
