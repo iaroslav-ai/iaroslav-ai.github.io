@@ -1,11 +1,13 @@
 ---
 layout: post
-title: Local minimum is not a problem for Deep Learning
+title: Local minimum: not a problem for Deep Learning
 ---
 
-Introduction: local minimum problem of neural nets. One very recent work [arxiv Vidal] shows that given a certain type of nerual net it can be detected when global optimum is achieved and for sufficient number of neurons it is always possible to achieve global optimum with gradient descent. Similarly, algorithms for shallow networks were given in literature earlier [Montreal guys] that allow to achieve global optimum, when the number of neurons is not fixed. Moreover, for a network with rectified linear activations, a spin glass physics model was used in [2014 AIII] together with intense experiments to show that as the size of neural network is growing the quality of local minimum for such networks improves.
+A local minimum problem, associated with training of neural networks, is frequently viewed as a their serous drawback. In this post I argue why with proper initialization and popular choices of neuron types this problem does not affect much quality of local minimum.
 
-In this post I concentrate on supervised learning. I show that with proper initialization of neural network and for neurons which satisfy a certain criterion it becomes harder to arrive at bad local minimum. I show that local minimum of arbitrary quality can be achieved already at a stage of supervised initialization of neural net, given that the number of neurons or layers  can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The code of these experiments can be found at my gihub repository.
+Recently there appear many works that show that local minimum is not a problem. One very recent work [arxiv Vidal] shows that given a certain type of nerual net it can be detected when global optimum is achieved and for sufficient number of neurons it is always possible to achieve global optimum with gradient descent. Similarly, algorithms for shallow networks were given in literature earlier [Montreal guys] that allow to achieve global optimum, when the number of neurons is not fixed. Moreover, for a network with rectified linear activations, a spin glass physics model was used in [2014 AIII] together with intense experiments to show that as the size of neural network is growing the quality of local minimum for such networks improves.
+
+In this post I concentrate on supervised learning. I show that with proper initialization of neural network and for neurons which satisfy a certain criterion it becomes harder to arrive at bad local minimum. I show that local minimum of arbitrary quality can be achieved already at a stage of supervised initialization of neural net, given that the number of neurons or layers can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The code of these experiments can be found at my gihub repository.
 All of this findings imply that given a large amount of data and sufficiently large network initialized properly, supervised learning problem can always be solved efficiently.
 
 ### General philosopy
