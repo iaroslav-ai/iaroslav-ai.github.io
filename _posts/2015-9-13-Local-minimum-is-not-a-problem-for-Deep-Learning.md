@@ -46,7 +46,7 @@ $$
 \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2 \label{someref}
 $$
 
-When model \\( f(X,W) \eqref{ref1} \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+When model \\( \ref{ref1} \\) d \\( f(X,W) \eqref{ref1} \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
 ### Shallow networks: in between two extremes
 
