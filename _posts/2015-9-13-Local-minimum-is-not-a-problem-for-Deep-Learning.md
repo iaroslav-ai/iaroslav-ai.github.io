@@ -42,9 +42,7 @@ Good question, curious voice in my head! Lets first specify the learning problem
 
 Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
-$$
-\min\limits_{W \in R^{k}} || f(X,W) - Y ||_2^2 \quad (1)
-$$
+$$ \min\limits_{W \in R^{k}} || f(X,W) - Y ||_2^2 \quad (1) $$
 
 When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
@@ -54,9 +52,7 @@ We start with shallow networks, properties of which we will use to show some int
 
 Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). Then the output of shallow network for some input \\(x \in R^{m} \\)is defined as a linear combination of \\(u\\) neuron outputs:
 
-$$
-f(x,W) = \sum_{i \in 1 ... u} g_i(x,w_i) s_i
-$$
+$$ f(x,W) = \sum_{i \in 1 ... u} g_i(x,w_i) s_i \quad (2) $$
 
 where values of \\( w_i \\) and \\(s_i\\) are stored in the vector \\(W\\).
 
@@ -76,7 +72,7 @@ To give you a taste of quality of solutions with fixed neurons, here is example 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-The worst fit depends on the type of neurons used. In general, 
+The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of 
 
 Extreme case: M is not degenerate and square. Solve a linear system! therefore is a global optimum (one of them, at least). It is hard to describe how hard the resulting neural net would overfit. 
 
