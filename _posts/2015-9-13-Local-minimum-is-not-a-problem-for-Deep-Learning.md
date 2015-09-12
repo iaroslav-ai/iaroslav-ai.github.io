@@ -44,12 +44,11 @@ Here I assume that some data is given in the form of matrix \\(X \in R^{n \times
 
 $$ 
 \begin{equation}
-\min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2 \quad
-\label{eq:main_l2}
+\min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2 \label{eq:main_l2}
 \end{equation}
 $$
 
-When model \\( f(X,W) \eqref{eq:main_l2} \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+When model \\( f(X,W) \ref{eq:main_l2} \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
 ### Shallow networks: in between two extremes
 
