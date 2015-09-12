@@ -171,8 +171,7 @@ $$
   s' \\\\
   s 
 \end{array}
-\right)
-+
+\right) = 
 \left(
 \begin{array}{cc}
   g'^T Y  \\\\
