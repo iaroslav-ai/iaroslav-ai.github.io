@@ -95,8 +95,7 @@ All of the above reasoning means that extending network by additional neurons wi
 It is however not clear how much of improvement extra neurons are causing. To verify the claims I make I present experimental results for simple artificial problem of fitting the 2d function with different number of neurons. Average values for different number of neurons are shown below. One hundred different random instances of function were considered to make results more robust.
 
 All of the above values are upper bounds on any local minimum of \\(
-eqref{eq:main}\\), which bounds how "bad" local minimum could be. 
-Results support proposed resoning and demonstrate that supervised pretraining can already achieve good results.
+eqref{eq:main}\\), which bounds how "bad" local minimum could be. This demonstrates that local minimum quality, as measured by objective function, improves with increase of number of neurons. Furthermore is shows that supervised pretraining of neural net can already achieve good results.
 
 ### Going deep for error correction
 
