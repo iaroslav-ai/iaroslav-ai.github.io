@@ -12,7 +12,7 @@ All of this findings imply that given a large amount of data and sufficiently la
 
 ### General philosopy
 
-Intro: here I outline the more abstract view that explain why enriching model makes learning with it easier.
+First I would like to outline the more abstract view that explain why enriching model makes learning with such model easier.
 
 Poor model: global optimum by enumeration
 
