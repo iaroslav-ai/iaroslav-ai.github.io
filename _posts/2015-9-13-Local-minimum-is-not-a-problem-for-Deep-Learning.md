@@ -74,7 +74,7 @@ $$
 \min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin-fxnn}
 $$
 
-All of a sudden, above problem is convex and thus can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\)! Moreover, its solution is an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
+All of a sudden, learning probelm becomes convex! This means that it can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
 
 To give you a taste of quality of solutions with fixed neurons, here is example fit of some wiggly function with 10 random neurons:
 
