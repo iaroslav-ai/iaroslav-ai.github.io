@@ -134,7 +134,12 @@ $$
 || \left(\begin{array}{cc}
   g' & G 
 \end{array}
-\right) s - Y||\_2^2 = 0
+\right) \left(
+\begin{array}{cc}
+  s' \\\\
+  s 
+\end{array}
+\right) - Y||\_2^2 = 0
 $$
 
 Setting gradient of L2 regression objective yields:
