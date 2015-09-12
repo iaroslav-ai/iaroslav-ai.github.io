@@ -172,7 +172,7 @@ $$
   s 
 \end{array}
 \right)
-=
++
 \left(
 \begin{array}{cc}
   g'^T Y  \\\\
