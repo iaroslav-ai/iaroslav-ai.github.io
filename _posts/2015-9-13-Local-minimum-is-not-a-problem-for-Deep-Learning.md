@@ -88,7 +88,7 @@ For the number of neurons in between 0 and \\(|X|\\) (size of data) the values w
 
 First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability almost 1), outlined below.
 
-Theorem 1. Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if it does not hold that
+**Theorem 1.** Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if it does not hold that
 
 $$ 
 g'^T Gs = g'^T Y 
