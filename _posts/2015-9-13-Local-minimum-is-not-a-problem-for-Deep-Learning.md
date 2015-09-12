@@ -33,7 +33,7 @@ while the globally optimal arrangement of four Gaussians fits the data perfectly
 
 ![Global minimum for data fitting with 4 Gaussians.](/images/localminimum/figure_2.png)
 
-In the above figure there are three Gaussians with the same mean, that is why there appear to be only one red dot.
+In the above figure there are four Gaussians with the same mean, that is why there appear to be only one red dot.
 
 Above examples show that local minimum can be much worse than global optimum.
 
