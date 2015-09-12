@@ -112,7 +112,7 @@ How do you correct errors? First you make sure that you do not create any extra 
 
 Firstly, here I still assume that all of the neuron parameters are fixed. This allows to write extension of a network by one layer very simple by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network.
 
-So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previous layer now denoted as \\(X\\). By adding neuron with linear activation function \\(x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way due to convexity of \\(\eqref{eq:main}\\).
+So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previous layer now denoted as \\(X\\). By adding neuron with linear activation function \\(g(x) = x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way due to convexity of \\(\eqref{eq:main}\\).
 
 Above trick guarantees that extra layers necessary do not degrade the value of objective function. This together with result in previous section implies that adding extra layer should only improve the value of objective function.
 
