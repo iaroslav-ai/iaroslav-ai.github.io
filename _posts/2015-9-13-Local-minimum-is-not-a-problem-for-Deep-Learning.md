@@ -91,7 +91,7 @@ First, I show that adding extra neurons with fixed parameters always improves ob
 Theorem 1. Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if 
 
 $$ 
-g'^T Gs = g'^T Y 
+g'^T Gs \neq g'^T Y 
 $$
 
 where \\(g'\\) are the output values of added neuron for every training point.
