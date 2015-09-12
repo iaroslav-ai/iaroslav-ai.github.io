@@ -43,10 +43,10 @@ Good question, curious voice in my head! Lets first specify the learning problem
 Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
 $$ 
-\min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2 \tag{1}
+\min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{a}\tag{1}
 $$
 
-When model \\( f(X,W) \\) in [\\( \ref{1} \\)] is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+When model \\( f(X,W) \\) in [\\(\ref{a}\\)] is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
 ### Shallow networks: in between two extremes
 
