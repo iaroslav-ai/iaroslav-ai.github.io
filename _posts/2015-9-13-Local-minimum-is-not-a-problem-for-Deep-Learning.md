@@ -42,7 +42,7 @@ Good question, curious voice in my head! Lets first specify the learning problem
 
 Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
-$$ \min\limits_{W \in R^{k}} || f(X,W) - Y ||_2^2 \quad (1) $$
+$$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2 \quad (1) $$
 
 When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
@@ -52,9 +52,9 @@ We start with shallow networks, properties of which we will use to show some int
 
 Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). Then the output of shallow network for some input \\(x \in R^{m} \\)is defined as a linear combination of \\(u\\) neuron outputs:
 
-$$ f(x,W) = \sum_{i \in 1 ... u} g_i(x,w_i) s_i \quad (2) $$
+$$ f(x,W) = \sum\_{i \in 1 ... u} g\_i(x,w\_i) s\_i \quad (2) $$
 
-where values of \\( w_i \\) and \\(s_i\\) are stored in the vector \\(W\\).
+where values of \\( w\_i \\) and \\(s\_i\\) are stored in the vector \\(W\\).
 
 Due to the way the output of the shallow neural network is computed its training is a non-convex optimizaiton problem. Due to this property, training of neural network suffer from local minimum problem.
 
@@ -63,7 +63,7 @@ For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neur
 Imagine that I fix the parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
 
 $$
-\min\limits_{s \in R^{u}} || G s - Y ||_2^2
+\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2
 $$
 
 All of a sudden, above problem is convex and thus can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\)! Moreover, its solution is an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
