@@ -86,23 +86,43 @@ $$
 g'^T Gs = g'^T Y 
 $$
 
-All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
+where \\(g'\\) are the output values of added neuron for every training point.
 
-### Additional layers do error correction
+Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, however due to the non-linearity of neurons it is still "hard" to hit linear space.
 
-General philosophy: deeper layers fix errors of previous layers.
+All of the above reasoning means that extending network by additional neurons with non-linear outputs would almost always yield improvement of objective.
 
-Transition of outputs from previous layer to next layer without change: example for different neuron types. Simple for rectified linear.
+It is however not clear how much of improvement extra neurons are causing. To verify the claims I make I present experimental results for simple artificial problem of fitting the 2d function with different number of neurons. Average values for different number of neurons are shown below. One hundred different random instances of function were considered to make results more robust.
 
-Experiments with 3 neurons in a layer, arbitrary layers. Caution: information loss! Reference google net.
+All of the above values are upper bounds on any local minimum of \\(
+eqref{eq:main}\\), which bounds how "bad" local minimum could be. 
+Results support proposed resoning and demonstrate that supervised pretraining can already achieve good results.
 
-Add input data for every neruon: expected experimental results.
+### Going deep for error correction
+
+Imagine that you trained your shallow neural net with fixed neuron parameters, but you are not satisfied with objective value you are getting. Instead of adding additional neurons or optimizing over the neuron parameters, you want to add extra layer, in hope that it would "correct the errors" of previous layer.
+
+How do you correct errors? First you make sure that you do not create any extra ones! For neural net this means that extending network by one more layer should be done such that it does not increase the objective value.
+
+Firstly, here I still assume that all of the neuron parameters are fixed. This allows to write extension of a network by one layer very simple by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network.
+
+So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previous layer now denoted as \\(X\\). By adding neuron with linear activation function \\(x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way due to convexity of \\(\eqref{eq:main}\\).
+
+Above trick guarantees that extra layers necessary do not degrade the value of objective function. This together with result in previous section implies that adding extra layer should only improve the value of objective function.
+
+There is however one caveat here: it might happen that information that is passed through the layers is scrambled to such extend by all of the processing that further error correction yields very small to none improvements of objective function. To avoid this, I connect every additional layer to input data.
+
+Below the experimental results are shown for deep network with variable number of layers. Number of neurons was fixed to be 5 + one extra linear neuron.
+
+Above results show that already with described supervised pretraining for deep network, objective value of arbitrary quality can be achieved, when depth is not fixed. Such objective value is an upper bound for local minimum achieved with gradient descent.
 
 ### Conclusion
 
-As the number of neurons grows, learning becomes easier. Supervised pretraining allows to explicitly avoid bad local minima. Caution: overfitting, thus good for big data.
+Indeed, as the power of model growth, learning becomes easier. This was demonstrated for both shallow and deep network using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-### Proof of theorem 1
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with my findings this means that deep learning will continue being successful in the foreseeable future. 
+
+### Proof of Theorem 1
 
 The objective with one extra neuron is
 
