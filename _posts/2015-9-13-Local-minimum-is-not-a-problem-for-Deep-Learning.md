@@ -63,7 +63,7 @@ For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neur
 Imagine that I fix the parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
 
 $$
-\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin_fxnn}
+\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin-fxnn}
 $$
 
 All of a sudden, above problem is convex and thus can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\)! Moreover, its solution is an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
@@ -72,12 +72,9 @@ To give you a taste of quality of solutions with fixed neurons, here is example 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-Consider the case when we allow only one neuron. The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin_fxnn}}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin_fxnn}}\\), the worst objective becomes sum of squared deviations of data values from the mean.
+Consider the case when we allow only one neuron. The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin-fxnn}}\\), the worst objective becomes sum of squared deviations of data values from the mean.
 
-On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin_fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
-
-
-On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin_fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
+On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin-fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
 
 Extreme case: M is not degenerate and square. Solve a linear system! therefore is a global optimum (one of them, at least). It is hard to describe how hard the resulting neural net would overfit. 
 
