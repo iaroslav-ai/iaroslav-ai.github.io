@@ -72,17 +72,35 @@ To give you a taste of quality of solutions with fixed neurons, here is example 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-Consider the case when we allow only one neuron. The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin-fxnn}}\\), the worst objective becomes sum of squared deviations of data values from the mean.
+Consider the case when we allow only one neuron. The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
 
-On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin-fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
+On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero (depends on type of neurons used), solution to \\(\eqref{eq:lin-fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data beyond anything imaginable (recall the same scenario in the previous section).
 
-Extreme case: M is not degenerate and square. Solve a linear system! therefore is a global optimum (one of them, at least). It is hard to describe how hard the resulting neural net would overfit. 
+For the number of neurons in between 0 and \\(|X|\\) (size of data) the values would be distributed between \\( ||Y||\_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
 
-Extreme case: mean of all values Y.
+First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability almost 1), outlined below.
 
-Perturbation theory: something in between two extreme cases. Adding new neuron improves initialized network objective: condition when this happens.
+Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if 
 
-How uniform improvements are? Experimental results for random neurons!
+$$ 
+\left(
+\begin{array}{cc}
+  g' & G 
+\end{array}
+\right)^T (
+\left(
+\begin{array}{cc}
+  g' & G 
+\end{array}
+\right)
+\left(
+\begin{array}{cc}
+  s' \\
+  s 
+\end{array}
+\right)
+-Y) = 0
+$$
 
 All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
 
