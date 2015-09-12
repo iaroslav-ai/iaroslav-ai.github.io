@@ -36,17 +36,47 @@ An extreme example of such strategies is when every point in your dataset has a 
 
 Yeah, that all is great, but how does this relate to Deep Learning?
 
-Good question, curious voice in my head! Lets first specify a bit what we call a learning.
+Good question, curious voice in my head! Lets first specify the learning problem.
 
 ### Definition of learning problem
 
-Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)).
+Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
-L2 regression, but results can be generalized
+$$
+\min\limits_{W \in R^{k}} || f(X,W) - Y ||_2^2 \quad (1)
+$$
 
-### Shallow networks&#58 in between two extremes
+When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
-Define matrix M on data by fixing neuron weights. Resulting problem is convex and can be solved to global optimality! Solution is an upper bound on global optimum. Example plot with random initialization. Boosting.
+### Shallow networks: in between two extremes
+
+We start with shallow networks, properties of which we will use to show some interesting things for deep networks.
+
+Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). Then the output of shallow network for some input \\(x \in R^{m} \\)is defined as a linear combination of \\(u\\) neuron outputs:
+
+$$
+f(x,W) = \sum_{i \in 1 ... u} g_i(x,w_i) s_i
+$$
+
+where values of \\( w_i \\) and \\(s_i\\) are stored in the vector \\(W\\).
+
+Due to the way the output of the shallow neural network is computed its training is a non-convex optimizaiton problem. Due to this property, training of neural network suffer from local minimum problem.
+
+For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neurons for every training point in our dataset.
+
+Imagine that I fix the parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
+
+$$
+\min\limits_{s \in R^{u}} || G s - Y ||_2^2
+$$
+
+All of a sudden, above problem is convex and thus can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\)! Moreover, its solution is an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
+
+To give you a taste of quality of solutions with fixed neurons, here is example fit of some wiggly function with 10 random neurons:
+
+There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
+
+The worst fit depends on the type of neurons used. In general, 
 
 Extreme case: M is not degenerate and square. Solve a linear system! therefore is a global optimum (one of them, at least). It is hard to describe how hard the resulting neural net would overfit. 
 
@@ -58,7 +88,7 @@ How uniform improvements are? Experimental results for random neurons!
 
 All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
 
-### Additional layers for error correction
+### Additional layers do error correction
 
 General philosophy: deeper layers fix errors of previous layers.
 
