@@ -80,26 +80,10 @@ For the number of neurons in between 0 and \\(|X|\\) (size of data) the values w
 
 First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability almost 1), outlined below.
 
-Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if 
+Theorem 1. Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if 
 
 $$ 
-\left(
-\begin{array}{cc}
-  g' & G 
-\end{array}
-\right)^T (
-\left(
-\begin{array}{cc}
-  g' & G 
-\end{array}
-\right)
-\left(
-\begin{array}{cc}
-  s' \\
-  s 
-\end{array}
-\right)
--Y) = 0
+g'^T Gs = g'^T Y 
 $$
 
 All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
@@ -117,3 +101,70 @@ Add input data for every neruon: expected experimental results.
 ### Conclusion
 
 As the number of neurons grows, learning becomes easier. Supervised pretraining allows to explicitly avoid bad local minima. Caution: overfitting, thus good for big data.
+
+### Proof of theorem 1
+
+The objective with one extra neuron is
+
+$$
+\left(
+||
+\begin{array}{cc}
+  g' & G 
+\end{array}
+\right) s - Y||\_2^2 = 0
+$$
+
+Setting gradient of L2 regression objective yields:
+
+$$
+\left(
+\begin{array}{cc}
+  g' & G 
+\end{array}
+\right)^T (
+\left(
+\begin{array}{cc}
+  g' & G 
+\end{array}
+\right)
+\left(
+\begin{array}{cc}
+  s' \\\\
+  s 
+\end{array}
+\right)
+-Y) = 0
+$$
+
+This alternatively can be written as
+
+$$
+\left(
+\begin{array}{cc}
+  g'^T g' & g'^T G \\\\
+  G^T g'  & G^T G
+\end{array}
+\right) 
+\left(
+\begin{array}{cc}
+  s' \\\\
+  s 
+\end{array}
+\right)
+=
+\left(
+\begin{array}{cc}
+  g'^T Y  \\\\
+  G^T Y 
+\end{array}
+\right) 
+$$
+
+If neuron being added does not allow to improve objective value, then setting s' to zero and s to weights before the network was extended should satisfy above system of equations due to the convexity of optimization problem. For selected value of s and s' it holds that the only equation that does not necessary holds is
+
+$$
+g'^T Gs = g'^T Y 
+$$
+
+Thus, if above equation does not hold, then gradient of objective for s' = 0 is non zero, and thus objective can be improved at least a little bit.
