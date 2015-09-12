@@ -76,8 +76,6 @@ $$
 
 All of a sudden, learning probelm becomes convex! This means that it can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
 
-To give you a taste of quality of solutions with fixed neurons, here is example fit of some wiggly function with 10 random neurons:
-
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
 In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
