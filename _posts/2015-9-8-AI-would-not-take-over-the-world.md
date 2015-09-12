@@ -24,7 +24,7 @@ After rewriting of its utility to return numerical infinity, actions of AI would
 
 Overall under stated assumptions self improving AI does not seem to pose a serious threat to humanity. This does not mean that certain forms of automatic machinery would not be harmful to humans; For example, self replicating nano-bots could create serious problems. However, given that humanity would be able to create such nano-bots, it seems likely that more advanced anti nano-bots could be created as well. 
 
-One can also argue that AI could pose a serious threat given that sufficiently "hard to figure out" constraints are imposed on rewriting of the cost function. However such constraints would be designed by humans, and it seems likely given exponential explosion of AI "thought power" that it would figure out a way to hack through these constraints much faster than it would start to pose some serious threat. 
+One can also argue that AI could pose a serious threat given that sufficiently "hard to figure out" constraints are imposed on rewriting of the utility function. However such constraints would be designed by humans, and it seems likely given exponential explosion of AI "thought power" that it would figure out a way to hack through these constraints much faster than it would start to pose some serious threat. 
 
 Reasoning in this post is supported by the evidence in practice. Humans tend to cheat frequently with their "utility function" as well. An extreme example is drug usage, which allows to directly target human reward system. Also every time you think about something nice or recall some pleasant memories, in a sense you cheat on your "happiness utility" as well. 
 
