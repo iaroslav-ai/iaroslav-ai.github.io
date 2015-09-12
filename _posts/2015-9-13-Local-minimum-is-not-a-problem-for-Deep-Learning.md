@@ -49,7 +49,7 @@ $$
 \end{equation}
 $$
 
-When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+When model \\( f(X,W) \eqref{eq:main_l2} \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
 ### Shallow networks: in between two extremes
 
