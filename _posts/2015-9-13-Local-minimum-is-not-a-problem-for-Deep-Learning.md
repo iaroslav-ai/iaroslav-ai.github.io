@@ -10,25 +10,31 @@ Recently there appear many works that show that local minimum is not a problem. 
 In this post I concentrate on supervised learning. I show that with proper initialization of neural network and for neurons which satisfy a certain criterion it becomes harder to arrive at bad local minimum. I show that local minimum of arbitrary quality can be achieved already at a stage of supervised initialization of neural net, given that the number of neurons or layers can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The code of these experiments can be found at [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum).
 All of this findings imply that given a large amount of data and sufficiently large network initialized properly, supervised learning problem can always be solved efficiently.
 
-### General philosopy
+### General approach
 
 First I would like to demonstrate on abstract level that when modelling power of the model is increased learning with such model becomes easier. Here I assume that such modelling power can be expressed in terms of number of parameters of a model and that increasing such number leads to increase of modelling power. 
 
 Consider for example the task of fitting data points shown on the following figure:
 
-Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian:
+![Example data.](/images/localminimum/figure_0.png)
 
-Thus, when number of parameters of the model is small, it might be computationally tractable to find the best set of parameters by simple enumeration.
+Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian. Thus, when number of parameters of the model is small, it might be computationally tractable to find the best set of parameters by simple enumeration.
 
 Now consider that instead of one Gaussian our model consists of four Gaussians. 
 As the number of parameters of our model increases, simple approach of enumeration rapidly becomes intractable, and thus methods like gradient descent are used, which frequently lead to local minimum. For example, the following model is example of local minimum achieved with gradient descent:
 
-while the globally optimal arrangement of Gaussians fits the data perfectly:
+![Example local minimum for data fitting with 4 Gaussians.](/images/localminimum/figure_1.png)
+
+while the globally optimal arrangement of four Gaussians fits the data perfectly:
+
+![Global minimum for data fitting with 4 Gaussians.](/images/localminimum/figure_2.png)
 
 Above examples show that local minimum can be much worse than global optimum.
 
 As the number of Gaussians further increases, so does the number of local minima that gradient descent can converge to. However, as you get more Gaussians to fit your data, it becomes harder to fit the data badly.
 If you would have some extra Gaussians at your disposal you could "fix" the bad areas of local minimum in above example like this:
+
+![Example fitting with larger number of Gaussians (7).](/images/localminimum/figure_3.png)
 
 Furthermore, you could think of some simple strategies on how to train a model given unlimited Gaussians such that you are guaranteed that you will not arrive at "bad" model. For example, you can add Gaussian to the place in your data where model and data disagree most; You repeat this procedure until difference between data and model is below some threshold, or when you cross validation error starts to grow. 
 
