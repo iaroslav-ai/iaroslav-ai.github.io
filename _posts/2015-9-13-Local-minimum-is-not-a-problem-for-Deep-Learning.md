@@ -104,7 +104,7 @@ It is however not clear how much of improvement extra neurons are causing. To ve
 
 All of the above values are upper bounds on any local minimum of \\( \eqref{eq:main} \\), which bounds how "bad" local minimum could be. This demonstrates that local minimum quality, as measured by objective function, improves with increase of number of neurons. Furthermore is shows that supervised pretraining of neural net can already achieve good results.
 
-### Going deep for error correction
+### Extra layers for error correction
 
 Imagine that you trained your shallow neural net with fixed neuron parameters, but you are not satisfied with objective value you are getting. Instead of adding additional neurons or optimizing over the neuron parameters, you want to add extra layer, in hope that it would "correct the errors" of previous layer.
 
@@ -126,7 +126,7 @@ Above results show that already with described supervised pretraining for deep n
 
 Indeed, as the size of neural network grows, learning becomes less susceptible to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with my findings this means that deep learning will continue being successful in the foreseeable future. 
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a probelm for larger networks this means that training of deep learning should only become easier, which would contribute to futher success of deep learning. 
 
 ### Proof of Theorem 1
 
