@@ -124,9 +124,9 @@ Above results show that already with described supervised pretraining for deep n
 
 ### Conclusion
 
-Indeed, as the size of neural network grows, learning becomes less susceptible to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
+Indeed, as the size of neural network grows, learning becomes less sensitive to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a probelm for larger networks this means that training of deep learning should only become easier, which would contribute to futher success of deep learning. 
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a probelm for larger networks this means that training of deep network should only become easier, which would contribute to futher success of deep learning. 
 
 ### Proof of Theorem 1
 
