@@ -38,21 +38,21 @@ In the above figure there are three Gaussians with the same mean, that is why th
 Above examples show that local minimum can be much worse than global optimum.
 
 As the number of Gaussians further increases, so does the number of local minima that gradient descent can converge to. However, as you get more Gaussians to fit your data, it becomes harder to fit the data badly.
-If you would have some extra Gaussians at your disposal you could "fix" the bad areas of local minimum in above example like this:
+If you would have some extra Gaussians at your disposal you could "fix" the bad areas of local minimum. For example, adding extra Gaussians to the initialization that lead to bad local minimum yields:
 
 ![Example fitting with larger number of Gaussians (7).](/images/localminimum/figure_3.png)
 
+which is in fact very close to the global optimum.
+
 Furthermore, you could think of some simple strategies on how to train a model given unlimited Gaussians such that you are guaranteed that you will not arrive at "bad" model. For example, you can add Gaussian to the place in your data where model and data disagree most; You repeat this procedure until difference between data and model is below some threshold, or when you cross validation error starts to grow. 
 
-An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its support to be small and its height to be equal to the value of the data, and voila! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
+An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its deviation to be small and its height to be equal to the value of the data, and voila! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
 
 ### Definition of learning problem
 
-Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain neural net \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
+I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain neural net \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
 $$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}$$
-
-In practice local solution to above problem is typically obtained using a variation of gradient descent.
 
 ### Shallow networks: in between two extremes
 
