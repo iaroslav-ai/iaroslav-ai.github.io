@@ -127,7 +127,7 @@ Computational power accessible to regular user grows exponentially by Moore's la
 The objective with one extra neuron is
 
 $$
-\left( || \begin{array}{cc}
+|| \left(\begin{array}{cc}
   g' & G 
 \end{array}
 \right) s - Y||\_2^2 = 0
