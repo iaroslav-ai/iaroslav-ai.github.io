@@ -34,23 +34,19 @@ Furthermore, you could think of some simple strategies on how to train a model g
 
 An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its support to be small and its height to be equal to the value of the data, and voila! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
 
-Yeah, that all is great, but how does this relate to Deep Learning?
-
-Good question, curious voice in my head! Lets first specify the learning problem.
-
 ### Definition of learning problem
 
-Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
+Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain neural net \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
 $$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}$$
 
-When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+In practice local solution to above problem is typically obtained using a variation of gradient descent.
 
 ### Shallow networks: in between two extremes
 
 We start with shallow networks, properties of which we will use to show some interesting things for deep networks.
 
-Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). Then the output of shallow network for some input \\(x \in R^{m} \\)is defined as a linear combination of \\(u\\) neuron outputs:
+Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). I define the output of shallow network for some input \\(x \in R^{m} \\) to be a linear combination of \\(u\\) neuron outputs:
 
 $$ f(x,W) = \sum\_{i \in 1 ... u} g\_i(x,w\_i) s\_i $$
 
