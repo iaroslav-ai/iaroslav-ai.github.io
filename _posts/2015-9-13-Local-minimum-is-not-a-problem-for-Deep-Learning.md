@@ -42,13 +42,9 @@ Good question, curious voice in my head! Lets first specify the learning problem
 
 Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain model \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
 
-$$ 
-\begin{equation}
-\min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}
-\end{equation}
-$$
+$$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}$$
 
-When model \\( f(X,W) \\) in \\(\eqref{eq:main}\\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
+When model \\( f(X,W) \\) is defined to be the neural network, above optimization problem is solved by gradient descent and using L2 objective.
 
 ### Shallow networks: in between two extremes
 
@@ -56,7 +52,7 @@ We start with shallow networks, properties of which we will use to show some int
 
 Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). Then the output of shallow network for some input \\(x \in R^{m} \\)is defined as a linear combination of \\(u\\) neuron outputs:
 
-$$ f(x,W) = \sum\_{i \in 1 ... u} g\_i(x,w\_i) s\_i \quad (2) $$
+$$ f(x,W) = \sum\_{i \in 1 ... u} g\_i(x,w\_i) s\_i $$
 
 where values of \\( w\_i \\) and \\(s\_i\\) are stored in the vector \\(W\\).
 
@@ -67,7 +63,7 @@ For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neur
 Imagine that I fix the parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
 
 $$
-\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \quad (3)
+\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin_fxnn}
 $$
 
 All of a sudden, above problem is convex and thus can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\)! Moreover, its solution is an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
@@ -76,7 +72,12 @@ To give you a taste of quality of solutions with fixed neurons, here is example 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of (3)
+Consider the case when we allow only one neuron. The worst fit depends on the type of neurons used. In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin_fxnn}}\\) would be the sum of squared values of data points. Furthermore, if bias can be additionally added to objecitve \\(\eqref{eq:lin_fxnn}}\\), the worst objective becomes sum of squared deviations of data values from the mean.
+
+On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin_fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
+
+
+On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that determinant of \\(G\\) is non zero, solution to \\(\eqref{eq:lin_fxnn}\\) can be found by simply solving system of linear equations \\(G s = Y\\). This in turn means that the value of objective for solution \\(s\\) would be zero. As this is an upper bound on non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data very hard (recall the same scenario in the previous section).
 
 Extreme case: M is not degenerate and square. Solve a linear system! therefore is a global optimum (one of them, at least). It is hard to describe how hard the resulting neural net would overfit. 
 
