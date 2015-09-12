@@ -12,21 +12,39 @@ All of this findings imply that given a large amount of data and sufficiently la
 
 ### General philosopy
 
-First I would like to outline the more abstract view that explain why enriching model makes learning with such model easier.
+First I would like to demonstrate on abstract level that when modelling power of the model is increased learning with such model becomes easier. Here I assume that such modelling power can be expressed in terms of number of parameters of a model and that increasing such number leads to increase of modelling power. 
 
-Poor model: global optimum by enumeration
+Consider for example the task of fitting data points shown on the following figure:
 
-Fine model: many local minima, large difference in quality
+Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian:
 
-Rich model: huge number of local minima, however difference is not large. Learning becomes easier, as less mistakes can be done for proper initialization.
+Thus, when number of parameters of the model is small, it might be computationally tractable to find the best set of parameters by simple enumeration.
+
+Now consider that instead of one Gaussian our model consists of four Gaussians. 
+As the number of parameters of our model increases, simple approach of enumeration rapidly becomes intractable, and thus methods like gradient descent are used, which frequently lead to local minimum. For example, the following model is example of local minimum achieved with gradient descent:
+
+while the globally optimal arrangement of Gaussians fits the data perfectly:
+
+Above examples show that local minimum can be much worse than global optimum.
+
+As the number of Gaussians further increases, so does the number of local minima that gradient descent can converge to. However, as you get more Gaussians to fit your data, it becomes harder to fit the data badly.
+If you would have some extra Gaussians at your disposal you could "fix" the bad areas of local minimum in above example like this:
+
+Furthermore, you could think of some simple strategies on how to train a model given unlimited Gaussians such that you are guaranteed that you will not arrive at "bad" model. For example, you can add Gaussian to the place in your data where model and data disagree most; You repeat this procedure until difference between data and model is below some threshold, or when you cross validation error starts to grow. 
+
+An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its support to be small and its height to be equal to the value of the data, and voila! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
+
+Yeah, that all is great, but how does this relate to Deep Learning?
+
+Good question, curious voice in my head! Lets first specify a bit what we call a learning.
 
 ### Definition of learning problem
 
-Some data X, Y is given
+Here I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (location of data points) and vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)).
 
 L2 regression, but results can be generalized
 
-### Shallow networks
+### Shallow networks&#58 in between two extremes
 
 Define matrix M on data by fixing neuron weights. Resulting problem is convex and can be solved to global optimality! Solution is an upper bound on global optimum. Example plot with random initialization. Boosting.
 
@@ -40,7 +58,7 @@ How uniform improvements are? Experimental results for random neurons!
 
 All values are upper bounds on any local optimum, which bounds how "bad" local minimum could be. This shows how important initialization can be. 
 
-### Additional layers to correct errors
+### Additional layers for error correction
 
 General philosophy: deeper layers fix errors of previous layers.
 
