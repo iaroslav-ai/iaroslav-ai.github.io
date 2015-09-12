@@ -118,7 +118,7 @@ Above results show that already with described supervised pretraining for deep n
 
 ### Conclusion
 
-Indeed, as the power of model growth, learning becomes easier. This was demonstrated for both shallow and deep network using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
+Indeed, as the size of neural network grows, learning becomes less susceptible to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
 Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with my findings this means that deep learning will continue being successful in the foreseeable future. 
 
