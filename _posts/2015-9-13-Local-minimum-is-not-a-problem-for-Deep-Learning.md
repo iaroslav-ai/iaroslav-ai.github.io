@@ -18,7 +18,11 @@ Consider for example the task of fitting data points shown on the following figu
 
 ![Example data.](/images/localminimum/figure_0.png)
 
-Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian. Thus, when number of parameters of the model is small, it might be computationally tractable to find the best set of parameters by simple enumeration.
+Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian:
+
+![Example local minimum for data fitting with 1 Gaussian.](/images/localminimum/figure_1.png)
+
+In above figure and in the next ones, red dot denotes mean of the Gaussian.
 
 Now consider that instead of one Gaussian our model consists of four Gaussians. 
 As the number of parameters of our model increases, simple approach of enumeration rapidly becomes intractable, and thus methods like gradient descent are used, which frequently lead to local minimum. For example, the following model is example of local minimum achieved with gradient descent:
@@ -28,6 +32,8 @@ As the number of parameters of our model increases, simple approach of enumerati
 while the globally optimal arrangement of four Gaussians fits the data perfectly:
 
 ![Global minimum for data fitting with 4 Gaussians.](/images/localminimum/figure_2.png)
+
+In the above figure there are three Gaussians with the same mean, that is why there appear to be only one red dot.
 
 Above examples show that local minimum can be much worse than global optimum.
 
