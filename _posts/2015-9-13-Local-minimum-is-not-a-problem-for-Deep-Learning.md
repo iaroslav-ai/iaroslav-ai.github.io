@@ -74,7 +74,7 @@ $$
 \min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin-fxnn}
 $$
 
-All of a sudden, learning probelm becomes convex! This means that it can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
+All of a sudden, learning problem becomes convex! This means that it can always be solved to global optimality with gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on global optimum of training problem. This means that if we are able to give some guarantes on solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
@@ -124,7 +124,7 @@ Above results show that already with described supervised pretraining for deep n
 
 Indeed, as the size of neural network grows, learning becomes less sensitive to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a probelm for larger networks this means that training of deep network should only become easier, which would contribute to futher success of deep learning. 
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a problem for larger networks this means that training of deep network should only become easier, which would contribute to futher success of deep learning. 
 
 ### Proof of Theorem 1
 
