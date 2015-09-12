@@ -20,7 +20,7 @@ Consider for example the task of fitting data points shown on the following figu
 
 Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a grid over the two parameters and thus find the best possible placement of Gaussian:
 
-![Example local minimum for data fitting with 1 Gaussian.](/images/localminimum/figure_1.png)
+![Example local minimum for data fitting with 1 Gaussian.](/images/localminimum/figure_0.5.png)
 
 In above figure and in the next ones, red dot denotes mean of the Gaussian.
 
