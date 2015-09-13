@@ -155,7 +155,7 @@ One of the issues I expected from deep nets is the following: it might happen th
 
 ![Result of extension by a layer with 5 rectified linear neurons and one with linear activation, where every layer is connected to input.](/images/localminimum/experiments_8.png)
 
-Indeed, compared to network with no connection of deeper layers to input, network objective improve much faster. 
+Indeed, compared to network with no connection of deeper layers to input, network objective improves much faster. 
 
 What is more interesting is that such deep network can be constructed from shallow network as follows: let \\(l\\) be number of layers, and \\(n\\) be number of neurons in the layer. First, pretrain shallow network with \\(l n\\) neurons as in previous section. Then, select first \\(l\\) neurons of shallow net with output weights \\(s\\), and add them as first layer of deep network. Add the next layer; To the deepest layer add neuron with linear activation which corresponds to \\(f(x) = s^T x\\) and next \\(l\\) neurons  of shallow net and set \\(s\\) to their output weights. Add one more layer. To the deepest layer add linear neuron which has weights \\(s\\) for ReLU neurons on previous layers and 1 for the linear activation neuron. Recursively apply the above procedure, until all of neurons of a shallow net are not used.
 
