@@ -102,12 +102,11 @@ A different story is for ReLU nonlinearity, which is linear almost everywhere ex
 
 Above results suggest that network can be extended by some random neuron such that it would yield improvement of objective with some large probability.
 
-It is however not clear how much of improvement extra neurons are causing. Average values for different number of neurons are shown below for tanh non-linearity. One hundred different random instances of function were considered to make results more robust.
+It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for dataset of 100 training points and different number of neurons, with supervised pretraining. Here tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
 
 ![Result of extension by random neuron with tanh non-linearity.](/images/localminimum/experiments_1.png)
 
-All of the above values of objective function are upper bounds on any local minimum of \\(
-eqref{eq:main}\\), which bounds how "bad" local minimum could be. This confirms our theoretical derivations for shallow networks and demonstrates that local minimum quality, as measured by objective function, rapidly improves with increase of number of neurons. In order to see better how objective behaves for larger amount of neurons, here is the same plot on logarithmic scale:
+All of the above values of objective function are upper bounds on any local minimum of \\(eqref{eq:main}\\), which bounds how "bad" local minimum could be. This confirms our theoretical derivations for shallow networks and demonstrates that local minimum quality, as measured by objective function, rapidly improves with increase of number of neurons. In order to see better how objective behaves for larger amount of neurons, here is the same plot on logarithmic scale:
 
 ![Result of extension by random neuron with tanh  non-linearity on logarithmic scale.](/images/localminimum/experiments_2.png)
 
@@ -157,7 +156,7 @@ One of the issues I expected from deep nets is the following: it might happen th
 
 Indeed, compared to network with no connection of deeper layers to input, network objective improve much faster. 
 
-What is more interesting is that such deep network can be constructed from shallow network as follows: let l be number of layers, and t be number of neurons in the layer. First, pretrain shallow network with \\(l n\\) neurons as in previous section. Then, select first \\(l\\) neurons of shallow net with output weights \\(s\\), and add them as first layer of deep network. Add the next layer; To the deepest layer add neuron with linear activation which corresponds to \\(f(x) = s^T x\\) and next \\(l\\) neurons  of shallow net and set \\(s\\) to their output weights. Add one more layer. To the deepest layer add linear neuron which has weights \\(s\\) for ReLU neurons on previous layers and 1 for the linear activation neuron. Recursively apply the above procedure, until all of neurons of a shallow net are not used.
+What is more interesting is that such deep network can be constructed from shallow network as follows: let \\(l\\) be number of layers, and \\(n\\) be number of neurons in the layer. First, pretrain shallow network with \\(l n\\) neurons as in previous section. Then, select first \\(l\\) neurons of shallow net with output weights \\(s\\), and add them as first layer of deep network. Add the next layer; To the deepest layer add neuron with linear activation which corresponds to \\(f(x) = s^T x\\) and next \\(l\\) neurons  of shallow net and set \\(s\\) to their output weights. Add one more layer. To the deepest layer add linear neuron which has weights \\(s\\) for ReLU neurons on previous layers and 1 for the linear activation neuron. Recursively apply the above procedure, until all of neurons of a shallow net are not used.
 
 By construction, above network should have objective value similar to the shallow one. This means that all of the analysis in previous section applies to such network!
 
