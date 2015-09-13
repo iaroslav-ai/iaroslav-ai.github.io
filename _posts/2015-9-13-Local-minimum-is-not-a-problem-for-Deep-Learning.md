@@ -100,7 +100,6 @@ First I try neurons with tanh nonlinearity. As hyperbolic tanhent is non-linear 
 
 A different story is for ReLU nonlinearity, which is linear almost everywhere except for 0. For 15000 added neurons 5000 did not improve the objective function. This is due to the sampled weights being too large, which results in many of 5000 neurons either returning 0 or being completely linear for all data points. In order to avoid that, I multiplied sampled weights by 0.01, which reduced the number of non-improving neurons to 1000. It appears that due to ReLU neurons being "more linear", it is easier to "hit" the linear subspace. Nevertheless, for proper sampling of weights such probability is small.
 
-<<<<<<< HEAD
 Above results suggest that network can be extended by some random neuron such that it would yield improvement of objective with some large probability.
 
 It is however not clear how much of improvement extra neurons are causing. Average values for different number of neurons are shown below for tanh non-linearity. One hundred different random instances of function were considered to make results more robust.
@@ -127,9 +126,6 @@ Similar results are obtained for rectified linear activation:
 ![Result of extension by random neuron with random permutation of network and with rectified non-linearity on logarithmic scale.](/images/localminimum/experiments_5.png)
 
 This shows that with more advanced random pretraining procedures it is possible to improve initialization, which provides a better guarantee on local minimum. Such procedure would be used as well in the next section.
-=======
-All of the above values are upper bounds on any local minimum of \\( \eqref{eq:main} \\), which bounds how "bad" local minimum could be. This demonstrates that local minimum quality, as measured by objective function, improves with increase of number of neurons. Furthermore is shows that supervised pretraining of neural net can already achieve good results.
->>>>>>> origin/master
 
 ### Extra layers for error correction
 
@@ -137,7 +133,7 @@ Imagine that you trained your shallow neural net with fixed neuron parameters, b
 
 How do you correct errors? First you make sure that you do not create any extra ones! For neural net this means that extending network by one more layer should be done such that it does not increase the objective value.
 
-Firstly, here I still assume that all of the neuron parameters are fixed. This allows to write extension of a network by one layer very simple by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network. 
+Firstly, here I still assume that all of the neuron parameters are fixed. This allows to write extension of a network by one layer very simple by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network. 	
 
 So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previous layer now denoted as \\(X\\). By adding neuron with linear activation function \\(g(x) = x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way due to convexity of \\(\eqref{eq:main}\\).
 
@@ -171,11 +167,7 @@ It might not be always practical however to always connect layers to input, as i
 
 Indeed, as the size of neural network grows, learning becomes less sensitive to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-<<<<<<< HEAD
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with presented results this means that deep learning will continue being successful in the foreseeable future. 
-=======
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a problem for larger networks this means that training of deep network should only become easier, which would contribute to futher success of deep learning. 
->>>>>>> origin/master
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and as local minimum becomes less of a problem for larger networks this means that training of deep network should only become easier, which would contribute to further success of deep learning. 
 
 ### Proof of Theorem 1
 
