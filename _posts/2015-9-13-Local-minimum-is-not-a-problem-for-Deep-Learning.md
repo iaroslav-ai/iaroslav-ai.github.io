@@ -102,11 +102,11 @@ A different story is for ReLU nonlinearity, which is linear almost everywhere ex
 
 Above results suggest that network can be extended by some random neuron such that it would yield improvement of objective with some large probability.
 
-It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for dataset of 100 training points and different number of neurons, with supervised pretraining. Here tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
+It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for supervised pretraining, with dataset of 100 training points and different number of neurons. Here tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
 
 ![Result of extension by random neuron with tanh non-linearity.](/images/localminimum/experiments_1.png)
 
-All of the above values of objective function are upper bounds on any local minimum of \\(eqref{eq:main}\\), which bounds how "bad" local minimum could be. This confirms our theoretical derivations for shallow networks and demonstrates that local minimum quality, as measured by objective function, rapidly improves with increase of number of neurons. In order to see better how objective behaves for larger amount of neurons, here is the same plot on logarithmic scale:
+All of the above values of objective function are upper bounds on any local minimum of \\( \eqref{eq:main} \\), which bounds how "bad" local minimum could be. This confirms our theoretical derivations for shallow networks and demonstrates that local minimum quality, as measured by objective function, rapidly improves with increase of number of neurons. In order to see better how objective behaves for larger amount of neurons, here is the same plot on logarithmic scale:
 
 ![Result of extension by random neuron with tanh  non-linearity on logarithmic scale.](/images/localminimum/experiments_2.png)
 
