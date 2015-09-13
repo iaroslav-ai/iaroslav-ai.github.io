@@ -84,7 +84,7 @@ On the other side, consider a case when the number of neurons is equal to the nu
 
 For the number of neurons in between 0 and \\(|X|\\) (size of data) the values would be distributed between \\( ||Y||\_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
 
-First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability almost 1), outlined below.
+First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability close to / almost 1, depending on type of neuron), outlined below.
 
 **Theorem 1.** Given \\(u\\) neurons, adding one extra neuron to network improves objective \\(\eqref{eq:lin-fxnn}\\) if and only if it does not hold that
 
