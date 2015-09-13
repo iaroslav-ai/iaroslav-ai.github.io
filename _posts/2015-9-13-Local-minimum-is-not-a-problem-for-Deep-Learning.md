@@ -95,7 +95,7 @@ $$
 
 where \\(g'\\) are the output values of added neuron for every training point.
 
-Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit linear space. In order to keep things simple, I verify such claim experimentally with some artificial data. Python code that can be used to reproduce experiments is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). These experimental results are for simple artificial problem of fitting the 2d function with different number of neurons.
+Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit linear space. In order to keep things simple, I verify such claim experimentally with some artificial data. Python code that can be used to reproduce experiments is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). These experimental results are for simple artificial problem of fitting the 2d function with different number of neurons. Dataset size was fixed to be 100.
 
 First I try neurons with tanh nonlinearity. As hyperbolic tanhent is non-linear almost everywhere, I expect that due to this property the space where output \\(g \in R^{n}\\) lives is also non-linear almost everywhere, and thus "hitting" its intersection with linear subspace is almost impossible. Indeed, for around 10000 extensions of neural network its objective did not improve only once (and it might have happened due to the numerical errors). 
 
@@ -103,7 +103,7 @@ A different story is for ReLU nonlinearity, which is linear almost everywhere ex
 
 Above results suggest that network can be extended by some random neuron such that it would yield improvement of objective with some large probability.
 
-It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for supervised pretraining, with dataset of 100 training points and different number of neurons. Here tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
+It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for supervised pretraining, with dataset of 100 training points (here and below similar as in previous experiment) and different number of neurons. Here tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
 
 ![Result of extension by random neuron with tanh non-linearity.](/images/localminimum/experiments_1.png)
 
