@@ -127,7 +127,7 @@ Similar results are obtained for the rectified linear activation:
 
 This shows that with more advanced random pretraining procedures it is possible to improve teh initialization, which provides a better guarantee on a local minimum. Such procedure would be used as well in the next section.
 
-### Extra layers for error correction
+### Extra Layers for Error Correction
 
 Imagine that you trained your shallow neural net with fixed neuron parameters, but you are not satisfied with the objective value you are getting. Instead of adding additional neurons or optimizing over neuron parameters, you want to add an extra layer, in hope that it would "correct the errors" of previous layers.
 
