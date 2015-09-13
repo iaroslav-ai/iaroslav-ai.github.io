@@ -90,14 +90,38 @@ $$
 
 where \\(g'\\) are the output values of added neuron for every training point.
 
-Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, however due to the non-linearity of neurons it is still "hard" to hit linear space.
+Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit linear space. In order to keep things simple, I verify such claim experimentally with some artificial data. Python code that can be used to reproduce experiments is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). These experimental results are for simple artificial problem of fitting the 2d function with different number of neurons.
 
-All of the above reasoning means that extending network by additional neurons with non-linear outputs would almost always yield improvement of objective.
+First I try neurons with tanh nonlinearity. As hyperbolic tanhent is non-linear almost everywhere, I expect that due to this property the space where output \\(g \in R^{n}\\) lives is also non-linear almost everywhere, and thus "hitting" its intersection with linear subspace is almost impossible. Indeed, for around 10000 extensions of neural network its objective did not improve only once (and it might have happened due to the numerical errors). 
 
-It is however not clear how much of improvement extra neurons are causing. To verify the claims I make I present experimental results for simple artificial problem of fitting the 2d function with different number of neurons. Average values for different number of neurons are shown below. One hundred different random instances of function were considered to make results more robust.
+A different story is for ReLU nonlinearity, which is linear almost everywhere except for 0. For 15000 added neurons 5000 did not improve the objective function. This is due to the sampled weights being too large, which results in many of 5000 neurons either returning 0 or being completely linear for all data points. In order to avoid that, I multiplied sampled weights by 0.01, which reduced the number of non-improving neurons to 1000. It appears that due to ReLU neurons being "more linear", it is easier to "hit" the linear subspace. Nevertheless, for proper sampling of weights such probability is small.
 
-All of the above values are upper bounds on any local minimum of \\(
-eqref{eq:main}\\), which bounds how "bad" local minimum could be. This demonstrates that local minimum quality, as measured by objective function, improves with increase of number of neurons. Furthermore is shows that supervised pretraining of neural net can already achieve good results.
+Above results suggest that network can be extended by some random neuron such that it would yield improvement of objective with some large probability.
+
+It is however not clear how much of improvement extra neurons are causing. Average values for different number of neurons are shown below for tanh non-linearity. One hundred different random instances of function were considered to make results more robust.
+
+![Result of extension by random neuron with tanh non-linearity.](/images/localminimum/experiments_1.png)
+
+All of the above values of objective function are upper bounds on any local minimum of \\(
+eqref{eq:main}\\), which bounds how "bad" local minimum could be. This confirms our theoretical derivations for shallow networks and demonstrates that local minimum quality, as measured by objective function, rapidly improves with increase of number of neurons. In order to see better how objective behaves for larger amount of neurons, here is the same plot on logarithmic scale:
+
+![Result of extension by random neuron with tanh  non-linearity on logarithmic scale.](/images/localminimum/experiments_2.png)
+
+As expected, when the number of neurons approach size of dataset, objective rapidly approaches zero.
+
+Here are similar results for rectified linear activation, where only neurons that improve objective were used for network extension:
+
+![Result of extension by random neuron with rectified linear non-linearity on logarithmic scale.](/images/localminimum/experiments_3.png)
+
+One can think of different ways on how to improve initialization of network so that it results in better objective values. For example, multiple neuron "candidates" can be sampled and the one is selected which yields the best objective improvement. What I however found more efficient is to make some random changes to the network weights and save the change if it leads to objective improvement. With larger number of changes I get better results, summarized in the following plot for tanh non-linearity:
+
+![Result of extension by random neuron with random permutation of network and with tanh non-linearity on logarithmic scale.](/images/localminimum/experiments_4.png)
+
+Similar results are obtained for rectified linear activation:
+
+![Result of extension by random neuron with random permutation of network and with rectified non-linearity on logarithmic scale.](/images/localminimum/experiments_5.png)
+
+This shows that with more advanced random pretraining procedures it is possible to improve initialization, which provides a better guarantee on local minimum. Such procedure would be used as well in the next section.
 
 ### Going deep for error correction
 
@@ -111,17 +135,35 @@ So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights o
 
 Above trick guarantees that extra layers necessary do not degrade the value of objective function. This together with result in previous section implies that adding extra layer should only improve the value of objective function.
 
-There is however one caveat here: it might happen that information that is passed through the layers is scrambled to such extend by all of the processing that further error correction yields very small to none improvements of objective function. To avoid this, I connect every additional layer to input data.
+I start my experiments with only one neuron with rectified linear activation on the layer + one linear neuron. Every time I add one extra neuron, I perform 100 iterations of network permutation to improve objective. Ten random instances were considered. Results look as follows:
 
-Below the experimental results are shown for deep network with variable number of layers. Number of neurons was fixed to be 5 + one extra linear neuron.
+![Result of extension by a layer with one rectified linear neuron and one with linear activation.](/images/localminimum/experiments_6.png)
 
-Above results show that already with described supervised pretraining for deep network, objective value of arbitrary quality can be achieved, when depth is not fixed. Such objective value is an upper bound for local minimum achieved with gradient descent.
+It appears that extending network by extra layers allows to steadily decrease the objective value, even though for this case I cannot state bound on number of neurons when objective would turn to zero. Wider networks should allow to perform more corrections and thus with larger number of neurons in layers objective should improve faster. This is confirmed by following results with 5 ReLU neurons:
+
+![Result of extension by a layer with 5 rectified linear neurons and one with linear activation.](/images/localminimum/experiments_7.png)
+
+Results are similar to ones with one ReLU, except that here 10 times less layers were used.
+
+It appears that already with described supervised pretraining for deep network, objective value of arbitrary quality can be achieved, when depth is not fixed. It is not clear however for which number of layers objective would turn to zero and if there might exist some example of data for which objective would never turn to zero. However, similar to shallow networks, such guarantee can be given to some class of deep topologies.
+
+One of the issues I expected from deep nets is the following: it might happen that information that is passed through the layers is scrambled to such extend by all of the processing that further error correction yields very small to none improvements of objective function. To avoid this, I connect every additional layer to input data, so that it always has access to "unscrambled" information. Here are results with 5 ReLU neurons:
+
+![Result of extension by a layer with 5 rectified linear neurons and one with linear activation, where every layer is connected to input.](/images/localminimum/experiments_8.png)
+
+Indeed, compared to network with no connection of deeper layers to input, network objective improve much faster. 
+
+What is more interesting is that such deep network can be constructed from shallow network as follows: let l be number of layers, and t be number of neurons in the layer. First, pretrain shallow network with \\(l n\\) neurons as in previous section. Then, select first \\(l\\) neurons of shallow net with output weights \\(s\\), and add them as first layer of deep network. Add the next layer; To the deepest layer add neuron with linear activation which corresponds to \\(f(x) = s^T x\\) and next \\(l\\) neurons  of shallow net and set \\(s\\) to their output weights. Add one more layer. To the deepest layer add linear neuron which has weights \\(s\\) for ReLU neurons on previous layers and 1 for the linear activation neuron. Recursively apply the above procedure, until all of neurons of a shallow net are not used.
+
+By construction, above network should have objective value similar to the shallow one. This means that all of the analysis in previous section applies to such network!
+
+It might not be always practical however to always connect layers to input, as input size can be large, which would increase greatly the number of parameters in network and thus make it more prone to overfitting. However it [was shown](http://arxiv.org/abs/1409.4842) to be helpful to connect some deeper layers to earlier layers, which allows to obtain "less scrambled" version of the input, while avoiding explosion of the parameters. Additionally, instead of connecting to the input, deeper layers can connect to the first layer after the input, which can be made to have smaller number of outputs compared to size of input.
 
 ### Conclusion
 
 Indeed, as the size of neural network grows, learning becomes less susceptible to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides upper bound on local minimum objective value. 
 
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with my findings this means that deep learning will continue being successful in the foreseeable future. 
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models can be used for "machine learning in the wild", and together with presented results this means that deep learning will continue being successful in the foreseeable future. 
 
 ### Proof of Theorem 1
 
