@@ -167,9 +167,9 @@ It might not always be practical to connect all layers to the input layer, as in
 
 ### Conclusion
 
-Indeed, as the size of neural network grows, learning becomes less sensitive to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides an upper bound on a local minimum objective value. 
+Indeed, as the size of neural network grows, learning becomes less sensitive to the local minimum problem. This was demonstrated for both shallow and deep neural networks using a supervised pretraining procedure, which allows to obtain any desired objective value, given that number of neurons / layers is not fixed, and which provides an upper bound on any local minimum objective value. 
 
-Computational power accessible to regular user grows exponentially by Moore's law. This means that larger models become feasible for "machine learning in the wild", and as a local minimum becomes less of a problem for larger networks this means that training of a deep network should only become easier, which would contribute to further success of deep learning. 
+Computational power accessible to regular user grows exponentially by Moore's law. This means that larger neural networks becomes quickly feasible for "machine learning in the wild", and as convergence to a local minimum becomes less of a problem for larger networks this means that training of a large deep networks should only become easier, which would contribute to further success of deep learning. 
 
 ### Proof of Theorem 1
 
