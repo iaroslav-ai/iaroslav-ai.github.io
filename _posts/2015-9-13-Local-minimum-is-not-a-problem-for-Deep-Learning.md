@@ -95,6 +95,8 @@ $$
 
 where \\(g'\\) are output values of the added neuron for every training point.
 
+Proof of the theorem is in the end of the post.
+
 Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of the neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit the linear space. In order to keep things simple, I verify such claim experimentally with the artificial data. Python code that can be used to reproduce experiments below is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). Experimental results shown below are for a simple artificial problem of fitting the 2d function with a different number of neurons. Dataset size was fixed to be 100.
 
 First I try neurons with the tanh non-linearity. As the hyperbolic tanhent is non-linear almost everywhere, I expect that due to this property the space where the output \\(g \in R^{n}\\) lives is also non-linear almost everywhere, and thus "hitting" its intersection with the linear subspace is almost impossible. Indeed, for around 10000 extensions of the neural network its objective did not improve only once (and it might have happened due to numerical errors). 
