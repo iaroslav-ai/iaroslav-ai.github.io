@@ -173,7 +173,7 @@ Computational power accessible to regular user grows exponentially by Moore's la
 
 ### Proof of Theorem 1
 
-Let \\(s'\\) denote weight for newly added neuron. The objective function with one extra neuron is
+Let \\(s'\\) denote a weight for a newly added neuron. The objective function with one extra neuron is
 
 $$
 || \left(\begin{array}{cc}
@@ -187,7 +187,7 @@ $$
 \right) - Y||\_2^2
 $$
 
-At optimum of L2 regression optimization problem it holds that:
+At the optimum of the L2 regression optimization problem it holds that:
 
 $$
 \left(
@@ -232,10 +232,10 @@ $$
 \right) 
 $$
 
-If neuron being added does not allow to improve objective value, then setting \\(s'\\) to zero and \\(s\\) to weights before the network was extended should satisfy above system of equations due to the convexity of optimization problem. For selected value of \\(s\\) and \\(s'\\) it holds that the only equation that does not necessary holds is
+If neuron being added does not allow to improve the objective value, then setting \\(s'\\) to zero and \\(s\\) to weights before the network was extended should satisfy above system of equations due to the convexity of the optimization problem. For selected value of \\(s\\) and \\(s'\\) it holds that the only equation that does not necessary holds is
 
 $$
 g'^T Gs = g'^T Y 
 $$
 
-Thus, if above equation does not hold, then gradient of objective for \\(s' = 0\\) is non zero, and thus objective can be improved at least a little bit.
+Thus, if above equation does not hold, then the gradient of objective for \\(s' = 0\\) is non zero, and thus objective can be improved at least a little bit.
