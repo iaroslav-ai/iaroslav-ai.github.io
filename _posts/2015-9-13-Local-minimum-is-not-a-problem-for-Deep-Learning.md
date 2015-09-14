@@ -3,9 +3,9 @@ layout: post
 title: Local minimum&#58; not a problem for Deep Learning
 ---
 
-The local minimum problem, associated with the training of deep neural networks, is frequently viewed as a serous drawback of Deep Learning. In this post I argue why with a proper initialization and popular choices of neuron types this problem does not affect much quality of a local minimum. I confirm my results with some experimental evaluation.
+The local minimum problem, associated with the training of deep neural networks, is frequently viewed as a serous drawback of the Deep Learning. In this post I argue why with a supervised pretraining initialization and popular choices of neuron types this problem does not affect much quality of a local minimum. I confirm my results with some experimental evaluation.
  
-Recently there appeared many works that show that a local minimum becomes less of a problem for deep learning when the number of neurons/layers grows. One [very recent work](http://arxiv.org/pdf/1506.07540.pdf) shows that given a certain type of neural net it can be detected when the global optimum is achieved and for sufficient number of neurons it is always possible to achieve the global optimum with the gradient descent. [Moreover](http://arxiv.org/pdf/1412.0233.pdf), a spin glass physics model was used together with intense experiments to show that as the size of the neural network is growing the quality of a local minimum for such networks improves.
+Recently there appeared many works that show that a local minimum becomes less of a problem for the deep learning when the number of neurons/layers grows. One [very recent work](http://arxiv.org/pdf/1506.07540.pdf) shows that given a certain type of neural net it can be detected when the global optimum is achieved and for a sufficient number of neurons it is always possible to achieve the global optimum with the gradient descent. [Moreover](http://arxiv.org/pdf/1412.0233.pdf), a spin glass physics model was used together with intense experiments to show that as the size of the neural network is growing the quality of a local minimum for such networks improves.
 
 In this post I concentrate on supervised learning. I show that with the proper initialization it becomes harder to arrive at a bad local minimum as the number of neurons increases. I show that a local minimum of an arbitrary quality can be achieved already at a stage of a supervised initialization of the neural net, given that the number of neurons or layers can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The Python code of these experiments can be found at [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum).
 
@@ -103,7 +103,7 @@ A different story is for the ReLU non-linearity, which is linear almost everywhe
 
 Above results suggest that network can be extended by some random neuron such that it would yield an improvement of the objective with some large probability.
 
-It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for the supervised pretraining, with dataset of 100 training points (here and below similar as in previous experiment) and different number of neurons. Here the tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
+It is however not clear how much of improvement extra neurons are causing. To gain some insight, consider average objective values for the supervised pretraining, with dataset of 100 training points (here and below similar as in previous experiment) and a different number of neurons. Here the tanh non-linearity was used. Results were averaged over one hundred different random instances of dataset.
 
 ![Result of extension by random neuron with tanh non-linearity.](/images/localminimum/experiments_1.png)
 
@@ -117,7 +117,7 @@ Here are similar results for the rectified linear activation, where only neurons
 
 ![Result of extension by random neuron with rectified linear non-linearity on logarithmic scale.](/images/localminimum/experiments_3.png)
 
-One can think of different ways on how to improve the initialization of the network so that it results in better objective values. For example, multiple neuron "candidates" can be sampled and the one is selected which yields the best objective improvement. What I however found more efficient is to make some random changes to the network weights and save the change if it leads to objective improvement. With larger number of changes I get better results, summarized in the following plot for the tanh non-linearity:
+One can think of different ways on how to improve the initialization of the network so that it results in better objective values. For example, multiple neuron "candidates" can be sampled and the one is selected which yields the best objective improvement. What I however found more efficient is to make some random changes to the network weights and save the change if it leads to objective improvement. With a larger number of changes I get better results, summarized in the following plot for the tanh non-linearity:
 
 ![Result of extension by random neuron with random permutation of network and with tanh non-linearity on logarithmic scale.](/images/localminimum/experiments_4.png)
 
@@ -161,7 +161,7 @@ What is more interesting is that such a deep network can be constructed from a s
 
 By construction, above network should have the objective value exactly as the shallow one. This means that all of the analysis in the previous section applies to such network!
 
-It might not always be practical to connect all layers to the input layer, as input size can be large, which would increase greatly the number of parameters in a network and thus make it more prone to overfitting. However it [was shown](http://arxiv.org/abs/1409.4842) to be helpful to connect some deeper layers to earlier layers, which allows to provide them with "less scrambled" version of the input, while avoiding explosion of the number of parameters. Additionally, instead of connecting to the input, deeper layers can connect to the first layer after the input, which can be made to have smaller number of outputs compared to size of input.
+It might not always be practical to connect all layers to the input layer, as input size can be large, which would increase greatly the number of parameters in a network and thus make it more prone to overfitting. However it [was shown](http://arxiv.org/abs/1409.4842) to be helpful to connect some deeper layers to earlier layers, which allows to provide them with "less scrambled" version of the input, while avoiding explosion of the number of parameters. Additionally, instead of connecting to the input, deeper layers can connect to the first layer after the input, which can be made to have a smaller number of outputs compared to size of an input.
 
 ### Conclusion
 
