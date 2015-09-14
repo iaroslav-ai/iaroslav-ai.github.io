@@ -129,29 +129,29 @@ This shows that with more advanced random pretraining procedures it is possible 
 
 ### Extra Layers for Error Correction
 
-Imagine that you trained your shallow neural net with fixed neuron parameters, but you are not satisfied with the objective value you are getting. Instead of adding additional neurons or optimizing over neuron parameters, you want to add an extra layer, in hope that it would "correct the errors" of previous layers.
+Imagine that you trained your shallow neural net with fixed neuron parameters, but you are not satisfied with the objective value you are getting. Instead of adding additional neurons or optimizing over neuron parameters, you want to add an extra layer. Adding an extra layer(s) to the network should perform an "error correction" of the previous layers of the network.
 
-How do you correct errors? First you make sure that you do not create any extra ones! For neural net this means that extending the network by one more layer should be done such that it does not increase the objective value.
+Firstly, here I still fix all of the neuron parameters. This allows to write extension of a network by one layer in a very simple way by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of a new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network. Similar to previous section, an objective value for the initialization with fixed neurons parameters yields an upper bound on a local minimum achieved from such initialization with a gradient descent.
 
-Firstly, here I still assume that all of the neuron parameters are fixed. This allows to write extension of a network by one layer very simple by setting \\(X\\) equal to \\(G\\), and setting as \\(G\\) the outputs of neurons of new layer. Also for simplicity I assume that number of neurons is similar on each layer of (now deep) network. 	
+How do you correct errors? First you make sure that you do not create any extra ones! For neural net this means that extending the network by a one more layer should be done in such a way that is is guaranteed that the objective value of a network does not degrades.
 
-So how do you not mess up with new layer? Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previous layer now denoted as \\(X\\). By adding neuron with linear activation function \\(g(x) = x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way due to convexity of \\(\eqref{eq:main}\\).
+One way to do this as follows. Let \\(s \in R^{u}\\) denote weights of optimal linear combination for outputs of previously deepest hidden layer now denoted as \\(X\\). By adding a neuron with the linear activation function \\(g(x) = x^T s\\) to the new layer we necessary preserve the objective value, as weight for such neuron is necessary selected in the best way possible due to convexity of \\(\eqref{eq:main}\\). This means that weight can be set to one for the linear activation neuron and zero for all other neurons in the layer, which would necessary yield objective of network before extension.
 
-Above trick guarantees that extra layers necessary do not degrade the value of the objective function. This together with result in the previous section implies that adding an extra layer should only improve the value of the objective function.
+Above trick guarantees that extra layers necessary do not degrade the value of the objective function. This together with results associated with Theorem 1 in the previous section suggests that adding an extra layer would improve the value of the objective function with high probability.
 
-I start my experiments with only one neuron with the rectified linear activation on the layer + one linear neuron. Every time I add one extra neuron, I perform 100 iterations of random network changes to improve objective. Ten random instances were considered. Results look as follows:
+Lets do some experimental verification. I start with experiment where the network is extended a number of times by the layer consisting of one neuron with the rectified linear activation and one linear neuron as per described trick. Every time I add one extra neuron, I perform 100 iterations of random network permutation procedure described in the previous section. Results are averaged over 10 instances of dataset from the previous section. Results look as follows:
 
 ![Result of extension by a layer with one rectified linear neuron and one with linear activation.](/images/localminimum/experiments_6.png)
 
-It appears that extending network by extra layers allows to steadily decrease the objective value, even though for this case I cannot state the bound on the number of neurons when objective would turn to zero. Wider networks should allow to perform more corrections and thus with a larger number of neurons in layers objective should improve faster. This is confirmed by following results with 5 ReLU neurons:
+Extending network by extra layers allows to steadily decrease the objective value as expected, even though for the deep case I cannot state the bound on the number of neurons when objective would turn to zero. Wider networks should allow to perform better corrections and thus with a larger number of neurons in layers objective should improve faster. This is confirmed by following results with 5 ReLU neurons:
 
 ![Result of extension by a layer with 5 rectified linear neurons and one with linear activation.](/images/localminimum/experiments_7.png)
 
 Results are similar to ones with one ReLU, except that here 10 times less layers were used.
 
-It appears that already with the described supervised pretraining for a deep network, objective value of an arbitrary quality can be achieved, when the number of layers is not fixed. It is not clear however for which number of layers objective would turn to zero and if there might exist some example of dataset for which objective would never turn to zero. However I will show below taht similar to shallow networks, such a guarantee can be given to a certain network topology.
+It appears that already with the described supervised pretraining for a deep network, objective value of an arbitrary quality can be achieved, when the number of layers is not fixed. It is not clear however for which number of layers objective would turn to zero and if there might exist some example of dataset for which objective would never turn to zero. However I will show below that similar to shallow networks, such a guarantee can be given to a certain network topology.
 
-One of the issues I expected from deep nets is the following: it might happen that an information that is passed through layers is scrambled to such extend by all of the processing that a further error correction yields very small to none improvements of the objective function. To avoid this, I connect every additional layer to the input layer, so that it always has access to the "unscrambled" information. Here are results with 5 ReLU neurons:
+One of the issues I expected from deep nets is the following: it might happen that an information that is passed through layers is scrambled to such extend by all of the processing that a further error correction yields very small to none improvements of the objective function. To avoid this, I connect every additional layer to the input layer, so that it always has access to the "unscrambled" input. Here are results with 5 ReLU neurons:
 
 ![Result of extension by a layer with 5 rectified linear neurons and one with linear activation, where every layer is connected to input.](/images/localminimum/experiments_8.png)
 
@@ -161,7 +161,7 @@ What is more interesting is that such a deep network can be constructed from a s
 
 By construction, above network should have the objective value exactly as the shallow one. This means that all of the analysis in the previous section applies to such network!
 
-It might not always be practical however to connect all layers to the input layer, as input size can be large, which would increase greatly the number of parameters in a network and thus make it more prone to overfitting. However it [was shown](http://arxiv.org/abs/1409.4842) to be helpful to connect some deeper layers to earlier layers, which allows to provide them with "less scrambled" version of the input, while avoiding explosion of the number of parameters. Additionally, instead of connecting to the input, deeper layers can connect to the first layer after the input, which can be made to have smaller number of outputs compared to size of input.
+It might not always be practical to connect all layers to the input layer, as input size can be large, which would increase greatly the number of parameters in a network and thus make it more prone to overfitting. However it [was shown](http://arxiv.org/abs/1409.4842) to be helpful to connect some deeper layers to earlier layers, which allows to provide them with "less scrambled" version of the input, while avoiding explosion of the number of parameters. Additionally, instead of connecting to the input, deeper layers can connect to the first layer after the input, which can be made to have smaller number of outputs compared to size of input.
 
 ### Conclusion
 
