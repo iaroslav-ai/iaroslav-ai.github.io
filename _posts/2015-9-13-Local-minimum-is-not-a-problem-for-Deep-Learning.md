@@ -3,7 +3,7 @@ layout: post
 title: Local minimum&#58; not a problem for Deep Learning
 ---
 
-The local minimum problem, associated with the training of deep neural networks, is frequently viewed as a serous drawback of the Deep Learning. In this post I argue why with a supervised pretraining initialization and popular choices of neuron types this problem does not affect much quality of a local minimum. I confirm my results with some experimental evaluation.
+The local minimum problem, associated with the training of deep neural networks, is frequently viewed as a serous drawback of the Deep Learning. In this post I argue why with a supervised pretraining initialization and popular choices of neuron types this problem does not affect much training of large neural networks. I confirm my results with some experimental evaluation.
 
 Recently there appeared many works that show that a local minimum becomes less of a problem for the deep learning when the number of neurons/layers grows. One [very recent work](http://arxiv.org/pdf/1506.07540.pdf) shows that given a certain type of neural net it can be detected when the global optimum is achieved and for a sufficient number of neurons it is always possible to achieve the global optimum with the gradient descent. [Moreover](http://arxiv.org/pdf/1412.0233.pdf), a spin glass physics model was used together with intense experiments to show that as the size of the neural network is growing the quality of a local minimum for such networks improves.
 
