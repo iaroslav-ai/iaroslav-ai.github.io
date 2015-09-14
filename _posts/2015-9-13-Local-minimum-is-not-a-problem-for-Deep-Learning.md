@@ -127,7 +127,7 @@ Similar results are obtained for the rectified linear activation:
 
 ![Result of extension by random neuron with random permutation of network and with rectified non-linearity on logarithmic scale.](/images/localminimum/experiments_5.png)
 
-This shows that with more advanced random pretraining procedures it is possible to improve teh initialization, which provides a better guarantee on a local minimum. Such procedure would be used as well in the next section.
+This shows that with more advanced random pretraining procedures it is possible to improve the initialization and obtain a better guarantee on a local minimum. Such procedure would be used as well in the next section.
 
 ### Extra Layers for Error Correction
 
@@ -141,7 +141,7 @@ One way to do this as follows. Let \\(s \in R^{u}\\) denote weights of optimal l
 
 Above trick guarantees that extra layers necessary do not degrade the value of the objective function. This together with results associated with Theorem 1 in the previous section suggests that adding an extra layer would improve the value of the objective function with high probability.
 
-Lets do some experimental verification. I start with an experiment where the network is extended a number of times by the layer consisting of one neuron with the rectified linear activation and one linear neuron as per described trick. Every time I add one extra neuron, I perform 100 iterations of random network permutation procedure described in the previous section. Results are averaged over 10 instances of dataset used in the previous section and they look as follows:
+Lets do some experimental verification. I start with an experiment where the network is extended a number of times by the layer consisting of one neuron with the rectified linear activation and one linear neuron as per described trick. Every time I add one extra neuron, I perform 100 iterations of random network permutation procedure described in the previous section; Results are averaged over 10 instances of dataset used in the previous section and they look as follows:
 
 ![Result of extension by a layer with one rectified linear neuron and one with linear activation.](/images/localminimum/experiments_6.png)
 
