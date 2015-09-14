@@ -230,10 +230,10 @@ $$
 \right) 
 $$
 
-If neuron being added does not allow to improve objective value, then setting s' to zero and s to weights before the network was extended should satisfy above system of equations due to the convexity of optimization problem. For selected value of s and s' it holds that the only equation that does not necessary holds is
+If neuron being added does not allow to improve objective value, then setting \\(s'\\) to zero and \\(s\\) to weights before the network was extended should satisfy above system of equations due to the convexity of optimization problem. For selected value of \\(s\\) and \\(s'\\) it holds that the only equation that does not necessary holds is
 
 $$
 g'^T Gs = g'^T Y 
 $$
 
-Thus, if above equation does not hold, then gradient of objective for s' = 0 is non zero, and thus objective can be improved at least a little bit.
+Thus, if above equation does not hold, then gradient of objective for \\(s' = 0\\) is non zero, and thus objective can be improved at least a little bit.
