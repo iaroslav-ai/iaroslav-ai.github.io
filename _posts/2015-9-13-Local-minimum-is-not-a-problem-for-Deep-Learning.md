@@ -173,7 +173,7 @@ Computational power accessible to regular user grows exponentially by Moore's la
 
 ### Proof of Theorem 1
 
-The objective with one extra neuron is
+Let \\(s'\\) denote weight for newly added neuron. The objective function with one extra neuron is
 
 $$
 || \left(\begin{array}{cc}
@@ -184,10 +184,10 @@ $$
   s' \\\\
   s 
 \end{array}
-\right) - Y||\_2^2 = 0
+\right) - Y||\_2^2
 $$
 
-Setting gradient of L2 regression objective yields:
+At optimum of L2 regression optimization problem it holds that:
 
 $$
 \left(
