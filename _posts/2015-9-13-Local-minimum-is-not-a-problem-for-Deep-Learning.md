@@ -14,9 +14,7 @@ All of this findings suggest that given a sufficiently large network initialized
 
 ### General Approach
 
-First I would like to demonstrate on a more abstract level that when the number of smaller models consisting one big model is increased learning with such model becomes easier. Here I assume that such modelling power can be expressed in terms of the number of parameters of a model and that increasing such number leads to the increase of modelling power. 
-
-Consider for example the task of fitting data points shown on the following figure:
+First I would like to demonstrate on a more abstract level that when the number of smaller models consisting one big model is increased learning with such model becomes easier. Consider for example the task of fitting data points shown on the following figure:
 
 ![Example data.](/images/localminimum/figure_0.png)
 
