@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Local minimum&#58; not a problem for Deep Learning
 ---
 
