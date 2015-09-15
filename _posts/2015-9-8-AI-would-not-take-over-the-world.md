@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Why AI would not take over the world
 ---
 
