@@ -6,9 +6,9 @@ title: Local minimum&#58; not a problem for Deep Learning
 
 The local minimum problem, associated with the training of deep neural networks, is frequently viewed as a serous drawback of the Deep Learning. In this post I argue why with a supervised pretraining initialization and popular choices of neuron types this problem does not affect much training of large neural networks. I confirm my results with some experimental evaluation.
 
-Recently there appeared many works that show that a local minimum becomes less of a problem for the deep learning when the number of neurons/layers grows. One [very recent work](http://arxiv.org/pdf/1506.07540.pdf) shows that given a certain type of neural net it can be detected when the global optimum is achieved and for a sufficient number of neurons it is always possible to achieve the global optimum with the gradient descent. [Moreover](http://arxiv.org/pdf/1412.0233.pdf), a spin glass physics model was used together with intense experiments to show that as the size of the neural network is growing the quality of a local minimum for such networks improves.
+Recently there appeared many works that show that convergence to a local minimum becomes less of a problem for the deep learning when the number of neurons/layers grows. Such works concentrate mostly on the ReLU type of neurons due to its recent success. One [very recent work](http://arxiv.org/pdf/1506.07540.pdf) shows that given a certain type of neural net it can be detected when the global optimum is achieved and for a sufficient number of neurons it is always possible to achieve the global optimum with the gradient descent. [Moreover](http://arxiv.org/pdf/1412.0233.pdf), a spin glass physics model was used together with intense experiments to show that as the size of the neural network is growing the quality of a local minimum for such networks improves.
 
-In this post I concentrate on supervised learning. I show that with the proper initialization it becomes harder to arrive at a bad local minimum as the number of neurons increases. I show that a local minimum of an arbitrary quality can be achieved already at a stage of a supervised initialization of the neural net, given that the number of neurons or layers can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The Python code of these experiments can be found at [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum).
+In this post I concentrate on the supervised learning. I show that with the proper initialization it becomes harder to arrive at a bad local minimum, as the number of neurons increases. I show that a local minimum of an arbitrary quality can be achieved already at a stage of a supervised initialization of the neural net, given that the number of neurons or layers can be selected arbitrary. To do so, I use some simple derivations and in general avoid any complicated math. I support my findings with some experimental evaluation. The Python code of these experiments can be found at [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum).
 
 All of this findings suggest that given a sufficiently large network initialized properly and a large amount of data so that such network does not overfit, supervised learning problem can always be solved efficiently with the gradient descent.
 
@@ -18,14 +18,14 @@ First I would like to demonstrate on a more abstract level that when the number 
 
 ![Example data.](/images/localminimum/figure_0.png)
 
-Consider using a model with relatively small modelling power - a single Gaussian. In our case such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a brute force search over the two parameters and thus find the best possible placement of the Gaussian:
+Consider using a model consisting of a single Gaussian. Such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a brute force search over parameters and thus to recover the best possible placement of the Gaussian:
 
 ![Example local minimum for data fitting with 1 Gaussian.](/images/localminimum/figure_0.5.png)
 
 In the above figure and in the next ones, red dot denotes the mean of the Gaussian.
 
-Now consider that instead of one Gaussian our model consists of four Gaussians. 
-As the number of parameters of our model increases, a simple approach of enumeration rapidly becomes intractable, and thus methods like gradient descent are used, which frequently lead to a local minimum. For example, the following model is example of a local minimum achieved with the gradient descent:
+Now consider that instead of one Gaussian our model is a sum of four Gaussians. 
+As the number of parameters of our model increases, a simple approach of enumeration rapidly becomes intractable, and thus methods like gradient descent are used instead, which frequently lead to a local minimum. For example, the following model is example of a local minimum achieved with the gradient descent:
 
 ![Example local minimum for data fitting with 4 Gaussians.](/images/localminimum/figure_1.png)
 
@@ -35,22 +35,23 @@ while the globally optimal arrangement of four Gaussians fits the data perfectly
 
 In the above figure there are four Gaussians with the same mean, that is why there appear to be only one red dot.
 
-Above examples show that a local minimum can be much worse than the global optimum.
+Above example show that a local minimum can be much worse than the global optimum.
 
-As the number of Gaussians further increases, so does the number of local minimum's that gradient descent can converge to. However, as you get more Gaussians to fit your data, it becomes harder to fit the data badly.
-If you would have some extra Gaussians at your disposal you could "fix" bad areas of local minimum. For example, adding extra Gaussians to the initialization that lead to a bad local minimum yields:
+As the number of Gaussians consisting our model further increases, so does the number of local minimum's that gradient descent can converge to. However, as you get more Gaussians to fit your data, it becomes harder to fit the data badly. In the previous example of bad local minimum, if you would have some extra Gaussians at your disposal you could "fix" bad areas of local minimum. Adding such extra Gaussians to the initialization that lead to the mentioned bad local minimum yields:
 
 ![Example fitting with larger number of Gaussians (7).](/images/localminimum/figure_3.png)
 
-which is in fact very close to the global optimum.
+which is in fact equal to the global optimum.
 
-Furthermore, you could think of some simple strategies on how to train a model given unlimited Gaussians such that you are guaranteed that you will not arrive at a "bad" model. For example, you can add Gaussian to the place in your data where the model and data disagree most; You repeat this procedure until difference between the data and model is below some threshold, or when you cross validation error starts to grow. 
+Furthermore, you could think of some simple strategies on how to train a model given unlimited Gaussians such that you are guaranteed that you will not arrive at a "bad" model. For example, you can add a Gaussian to the place in your data where  model and data disagree most; You repeat this procedure until difference between the data and model is below some threshold, or when the cross validation error starts to grow. 
 
-An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its deviation to be small and its height to be equal to the value of the data, and voilà! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
+An extreme example of such strategies is when every point in your dataset has a separate Gaussian. For every such Gaussian you set its deviation to be infinitesimally small so that it does not overlap with other Gaussians, and its height to be equal to the value of the data, and voilà! You don't even need training for your model, and you fit your data perfectly. Needles to say though, how bad such model would overfit.
 
 ### Definition of Learning Problem
 
-I assume that some data is given in the form of matrix \\(X \in R^{n \times m}\\) (locations of data points) and a vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain neural net \\( f(X, W) \to R^{n} \\) with parameters \\( W \in R^{k} \\) to my data \\(X,Y\\). I can formulate this in vector form as the following optimization problem:
+In order to proceed, I first specify a widely used formulation of training of neural network as an optimization problem.
+
+I assume that some data is given in the form of the matrix \\(X \in R^{n \times m}\\) (locations of data points) and a vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). I want to fit a certain neural net to my data \\(X,Y\\), outputs of which for every training point I write as \\( f(X, W) \to R^{n} \\), with net parameters denoted as \\( W \in R^{k} \\). I formulate this in vector form as the following optimization problem:
 
 $$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}$$
 
@@ -68,21 +69,21 @@ Due to the way the output of the shallow neural network is computed its training
 
 For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neurons for every training point in our dataset.
 
-Imagine that I fix the parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
+Imagine that I fix parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
 
 $$
 \min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin-fxnn}
 $$
 
-All of a sudden, the learning problem becomes convex! This means that it can always be solved to the global optimality with the gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on the global optimum of the training problem. This means that if we are able to give some guarantees on a solution of above problem, they will hold for the non-convex one (initialized at fixed neuron parameters). 
+All of a sudden, the learning problem becomes convex! This means that it can always be solved to the global optimality with the gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on the global optimum of the training problem. This means that if we are able to give some upper bound on a solution of above problem, it will hold for the non-convex one (initialized at fixed neuron parameters). 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points. Furthermore, if a bias can be additionally added to the objective \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
+In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points \\( ||Y||\_2^2 \\). Furthermore, if a bias can be additionally added to the objective \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
 
 On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that the determinant of \\(G\\) is non zero (which will be shown to hold in practice), solution to \\(\eqref{eq:lin-fxnn}\\) can be found by simply solving a system of linear equations \\(G s = Y\\). This in turn means that the objective value for a solution \\(s\\) would be zero. As this is an upper bound on the  non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal than zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data beyond anything imaginable (recall the same scenario in the previous section).
 
-For the number of neurons in between 0 and \\(|X|\\) (size of the dataset) the values would be distributed between \\( ||Y||\_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
+For the number of neurons in between 0 and \\(|X|\\) (size of the dataset) the values would be bound to be in between \\( ||Y||\_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
 
 First, I show that adding extra neurons with fixed parameters always improves objective, given that randomly initialized neurons satisfy a certain criterion (which happens with probability close to / almost 1, depending on the type of neuron), outlined below.
 
@@ -96,9 +97,9 @@ where \\(g'\\) are output values of the added neuron for every training point.
 
 Proof of the theorem is in the end of the post.
 
-Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of the neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit the linear space. In order to keep things simple, I verify such claim experimentally with the artificial data. Python code that can be used to reproduce experiments below is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). Experimental results shown below are for a simple artificial problem of fitting the 2d function with a different number of neurons. Dataset size was fixed to be 100.
+Observe that above equation defines some linear subspace of \\(R^{n}\\). Given some point \\(g'\\)  **uniformly sampled** from \\(R^{n}\\) probability of "hitting" such subspace is almost zero. In practice outputs are not uniform, and belong to some non-linear subspace defined by all possible outputs of the neuron for training points. One can argue that due to the non-linearity of neurons it would still be "hard" to hit the linear space. In order to keep things simple, I verify such claim experimentally with the artificial data. Python code that can be used to reproduce experiments below is in [my gihub repository](https://github.com/iaroslav-ai/nn-local-minimum). Experimental results shown below are for a simple artificial problem of fitting the 2d function with a different number of neurons. Dataset size was fixed to be 100.
 
-First I try neurons with the tanh non-linearity. As the hyperbolic tanhent is non-linear almost everywhere, I expect that due to this property the space where the output \\(g \in R^{n}\\) lives is also non-linear almost everywhere, and thus "hitting" its intersection with the linear subspace is almost impossible. Indeed, for around 10000 extensions of the neural network its objective did not improve only once (and it might have happened due to numerical errors). 
+First I try neurons with the tanh non-linearity. As the hyperbolic tanhent is non-linear almost everywhere, I expect that due to this property the space where the output \\(g \in R^{n}\\) lives is also non-linear almost everywhere, and thus "hitting" its intersection with the linear subspace is almost impossible. Indeed, for around 10000 extensions of the random neural network of size 1 - 100 neurons its objective did not improve only once (and it might have happened due to numerical errors). 
 
 A different story is for the ReLU non-linearity, which is linear almost everywhere except for 0. For 15000 added neurons 5000 did not improve the objective function. This is due to sampled weights being too large, which results in many of 5000 neurons either returning 0 or being completely linear for all data points. In order to avoid that, I multiplied sampled weights by 0.01, which reduced the number of non-improving neurons to 1000. It appears that due to ReLU neurons being "more linear", it is easier to "hit" the linear subspace. Nevertheless, for proper sampling of weights such probability is small.
 
@@ -118,6 +119,12 @@ Here are similar results for the rectified linear activation, where only neurons
 
 ![Result of extension by random neuron with rectified linear non-linearity on logarithmic scale.](/images/localminimum/experiments_3.png)
 
+It is clear that after some number of neurons model starts to overfit. This can be seen on the following figure, where different dataset size was used:
+
+![Result of extension by random neuron with rectified linear non-linearity on logarithmic scale.](/images/localminimum/experiments_3.5.png)
+
+Objective values were scaled for datasets of size 10^3 and 10^4 to be comparable to the on of the size 100. One can see that due to small dataset size modell for 100 points overift, while for larger dataset sizes small number of neurons yield almost the same objective value. 
+
 One can think of different ways on how to improve the initialization of the network so that it results in better objective values. For example, multiple neuron "candidates" can be sampled and the one is selected which yields the best objective improvement. What I however found more efficient is to make some random changes to the network weights and save the change if it leads to objective improvement. With a larger number of changes I get better results, summarized in the following plot for the tanh non-linearity:
 
 ![Result of extension by random neuron with random permutation of network and with tanh non-linearity on logarithmic scale.](/images/localminimum/experiments_4.png)
@@ -126,7 +133,7 @@ Similar results are obtained for the rectified linear activation:
 
 ![Result of extension by random neuron with random permutation of network and with rectified non-linearity on logarithmic scale.](/images/localminimum/experiments_5.png)
 
-This shows that with more advanced random pretraining procedures it is possible to improve the initialization and obtain a better guarantee on a local minimum. Such procedure would be used as well in the next section.
+This shows that with more advanced random pretraining procedures it is possible to improve the initialization and obtain a better guarantee on a local minimum. Such procedure would be used as well in the next section, where for deep network quality of deeper layer depend greatly on the quality of previous layer.
 
 ### Extra Layers for Error Correction
 
