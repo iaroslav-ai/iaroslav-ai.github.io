@@ -123,7 +123,7 @@ It is clear that after some number of neurons model starts to overfit. This can 
 
 ![Result of extension by random neuron with rectified linear non-linearity on logarithmic scale.](/images/localminimum/experiments_3.5.png)
 
-Objective values were scaled for datasets of size 10^3 and 10^4 to be comparable to the on of the size 100. One can see that due to small dataset size modell for 100 points overift, while for larger dataset sizes small number of neurons yield almost the same objective value. 
+Objective values were scaled for datasets of size 10^3 and 10^4 to be comparable to the one of the size 100. One can see that due to small dataset size modell for 100 points overift, while for larger dataset sizes small number of neurons yield almost the same objective value. 
 
 One can think of different ways on how to improve the initialization of the network so that it results in better objective values. For example, multiple neuron "candidates" can be sampled and the one is selected which yields the best objective improvement. What I however found more efficient is to make some random changes to the network weights and save the change if it leads to objective improvement. With a larger number of changes I get better results, summarized in the following plot for the tanh non-linearity:
 
