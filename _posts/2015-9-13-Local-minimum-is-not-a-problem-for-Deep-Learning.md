@@ -137,7 +137,7 @@ This shows that with more advanced random pretraining procedures it is possible 
 
 ![Result of extension by random neuron with random permutation of network and with rectified non-linearity on logarithmic scale for different dataset sizes.](/images/localminimum/experiments_5.5.png)
 
-The mean squared error can be calculated from objective values in above plot by dividing them by 100. So, the best mean squared error obtained for models that do not overfit is around 1e-3, which is already fairly decent. 
+The mean squared error can be calculated from objective values in above plot by dividing them by 100. So, the best mean squared error obtained for models that do not overfit is around 1e-3. 
 
 ### Extra Layers for Error Correction
 
