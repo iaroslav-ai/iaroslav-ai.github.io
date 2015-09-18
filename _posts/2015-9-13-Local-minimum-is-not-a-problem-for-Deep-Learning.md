@@ -49,7 +49,7 @@ An extreme example of such strategies is when every point in your dataset has a 
 
 ### Definition of Learning Problem
 
-In order to proceed, I first specify a widely used formulation of training of neural network as an optimization problem.
+In order to proceed, I first specify a widely used formulation of training of the neural network as an optimization problem.
 
 I assume that some data is given in the form of the matrix \\(X \in R^{n \times m}\\) (locations of data points) and a vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). Outputs of such network for every training point I write as \\( f(X, W) \to R^{n} \\), with net parameters denoted as \\( W \in R^{k} \\). I formulate the learning problem in the vector form as the following optimization problem:
 
