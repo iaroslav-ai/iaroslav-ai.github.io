@@ -1,12 +1,8 @@
 ---
 layout: post
 comments: true
-title: 10000 layers deep, 4 neurons wide network, and what you can learn from it
+title: Very deep learning and its properties
 ---
-
-Article is in construction still; I put it temporary untill I find some decent offline .md file viewer.
-
-I organize this post compactly in form of Q&A.
 
 **What will I learn from this post?**
 1. You can initialize deep net with shallow net. 
@@ -56,3 +52,4 @@ In general, neuron does projection on the axis with some non linearity on top; I
 
 How to know such dimension? Take a look at [manifold learning](http://scikit-learn.org/stable/modules/manifold.html). 
 
+P.S. Article is in construction still; I put it temporary untill I find some decent offline .md file viewer.
