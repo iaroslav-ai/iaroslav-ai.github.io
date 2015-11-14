@@ -12,17 +12,14 @@ title: Very deep learning and its properties
 5. You dont want your layers to be too "thin".
 
 **What kind of networks do you consider here?**
-
 Deep fully connected nets with single outputs, where every layer has at least 4 neurons. 
 Arguments can be generalized for multiple outputs as well.
 
 **How can I initialize deep net with shallow net?**
-
 Algorithm is given in [this post](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-Deep-Learning/).
 More specifically, you can use part of neurons for data transfer, part for processing, part for carrying the result to the output. See figure below for explanation.
 
 **So why does loss tends to 0 when network becomes deeper?**
-
 Firstly, you can almost always find a neuron that gives different output values for different training points, see figure below. 
 
 You can use such neuron to uniquely identify every training point with a single number.
@@ -33,21 +30,17 @@ Then you can reshape shallow network into the deep one with the same 0 loss valu
 To do that, it suffices to have 1 neuron for training point encoding, one neuron for processing, two neurons to carry output, totalling 4 neurons on the layer; see figure below.
 
 **Can you really encode every image with single number?**
-
 Theoretically you can. But this of course will not generalize.
 
 **Did you try that on any real dataset?**
-
 Yes, here is the result for 10000 MNIST images: 10000 layers, each 4 neurons wide, gives training loss of 1e-5, for 3 class prediction scheme, see figure below.
 
 **How hard does this approach overfit?**
-
 Very hard. Nevertheless, this shows that ultimatelly, as you increase number of layers and use pretraining procedure, training loss tends to zero.
 
 This shows that generalization does not necessary depends on local minimum quality. Thus without any relation to generalization studying local minimum quality is useless.
 
 **What should be done to not overfit?**
-
 In general, neuron does projection on the axis with some non linearity on top; If you necessary need m dimensions to generalize, you will loose some of these dimension with deep net n neurons wide, if m > n. Thus it would be not possible for such net to implement ground truth dependency between the inputs and outputs simply because information is lost. 
 
 How to know such dimension? Take a look at [manifold learning](http://scikit-learn.org/stable/modules/manifold.html). 
