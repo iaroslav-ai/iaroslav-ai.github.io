@@ -18,10 +18,6 @@ First I would like to demonstrate on a more abstract level that when the number 
 
 ![Example data.](/images/localminimum/figure_0.png)
 
-Test:
-
-![Example data.](/images/localminimum/Shallow_To_Deep.svg)
-
 Consider using a model consisting of a single Gaussian. Such model has only 2 parameters: mean and deviation. It is computationally tractable to perform a brute force search over parameters and thus to recover the best possible placement of the Gaussian:
 
 ![Example local minimum for data fitting with 1 Gaussian.](/images/localminimum/figure_0.5.png)
