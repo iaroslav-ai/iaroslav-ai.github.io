@@ -50,7 +50,7 @@ See [this post](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-
 
 Yes, here is the result for 10000 MNIST images: 10000 layers, each 4 neurons wide, gives training loss of 1e-5, for 3 class prediction scheme, see figure below.
 
-**3. You are interested in generalization **
+**3. You are interested in generalization**
 
 Above results show that generalization does not necessary depends on local minimum quality. Thus without any relation to generalization studying local minimum quality is useless.
 
