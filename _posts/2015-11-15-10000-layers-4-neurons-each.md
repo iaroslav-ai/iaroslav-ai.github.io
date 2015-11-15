@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Very deep learning and its properties
+title: 10000 layers each 4 neurons wide
 ---
 
 In this post you will learn that 
