@@ -51,13 +51,13 @@
     <g class="Page">
      <g class="com.sun.star.drawing.LineShape">
       <g id="id3">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11141 L 3410,2427"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11700 L 3410,2427"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 3410,1997 L 3260,2447 3560,2447 3410,1997 Z"/>
       </g>
      </g>
      <g class="com.sun.star.drawing.LineShape">
       <g id="id4">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 3412,11139 L 15937,11139"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 2778,11139 L 15937,11139"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 16367,11139 L 15917,10989 15917,11289 16367,11139 Z"/>
       </g>
      </g>

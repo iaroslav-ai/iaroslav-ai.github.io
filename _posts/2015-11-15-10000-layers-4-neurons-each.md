@@ -23,6 +23,8 @@ More specifically, you can use part of neurons for data transfer, part for proce
 
 Above figure shows described ininitialization scheme for deep fully connected networ. There \\(w_i\\) denote weights of i-th neuron in shallow net, and \\(a_i\\) it's output weight in final linear layer. 1s denote connections with weight one, and connections not drawn are set to zero. Essentially shallow net is put into deep net. 
 
+Notice that this kind of initialization is similar in spirit to [this paper](http://arxiv.org/abs/1505.00387), where in a sense deep networks are made more "shallow" by allowing some of the neurons in layer pass the information through them without a change. 
+
 **2. Loss tends to 0 when network becomes deeper**
 
 Firstly, you can almost always find a neuron that gives different output values for different training points, see figure below. 

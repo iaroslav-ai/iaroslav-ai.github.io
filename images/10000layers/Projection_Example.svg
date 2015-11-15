@@ -486,8 +486,8 @@
       </g>
       <g class="com.sun.star.drawing.LineShape">
        <g id="id31">
-        <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11132 L 16152,1772"/>
-        <path fill="rgb(0,0,0)" stroke="none" d="M 16499,1518 L 16047,1663 16225,1905 16499,1518 Z"/>
+        <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11132 L 16151,1773"/>
+        <path fill="rgb(0,0,0)" stroke="none" d="M 16498,1518 L 16047,1664 16224,1905 16498,1518 Z"/>
        </g>
       </g>
      </g>
@@ -508,13 +508,13 @@
      </g>
      <g class="com.sun.star.drawing.LineShape">
       <g id="id35">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11141 L 3410,2427"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 3410,11541 L 3410,2427"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 3410,1997 L 3260,2447 3560,2447 3410,1997 Z"/>
       </g>
      </g>
      <g class="com.sun.star.drawing.LineShape">
       <g id="id36">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 3412,11139 L 15937,11139"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 2905,11139 L 15937,11139"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 16367,11139 L 15917,10989 15917,11289 16367,11139 Z"/>
       </g>
      </g>

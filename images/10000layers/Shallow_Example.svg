@@ -145,7 +145,7 @@
      </g>
      <g class="com.sun.star.drawing.TextShape">
       <g id="id18">
-       <text class="TextShape"><tspan class="TextParagraph" font-family="Arial, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="4504" y="2840"><tspan fill="rgb(0,0,0)" stroke="none">Input vector</tspan></tspan></tspan></text>
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Arial, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="4504" y="2340"><tspan fill="rgb(0,0,0)" stroke="none">Input vector</tspan></tspan></tspan></text>
       </g>
      </g>
      <g class="com.sun.star.drawing.CustomShape">
@@ -293,7 +293,7 @@
      </g>
      <g class="com.sun.star.drawing.ConnectorShape">
       <g id="id45">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 6162,3106 L 6156,4733"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 6156,2775 L 6156,4733"/>
       </g>
      </g>
     </g>
