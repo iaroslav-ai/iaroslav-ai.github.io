@@ -48,7 +48,7 @@ See [this post](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-
 
 **2.1 Results on real dataset**
 
-Yes, here is the result for 10000 MNIST images: 10000 layers, each 4 neurons wide, gives training loss of 1e-5, for 3 class prediction scheme, see figure below.
+Yes, here is the result for 10000 MNIST images: 10000 layers, each 4 neurons wide, gives training loss of 1e-5. As inputs to the network I provide the images, and as outputs the corresponding labels (numbers 0 - 9).
 
 **3. You are interested in generalization**
 
