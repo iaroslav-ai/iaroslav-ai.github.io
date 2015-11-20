@@ -62,6 +62,8 @@ Typically, in neural networks neurons do projection on the vector with some non 
 
 In above figure instances of classes are sampled from rectangles of respective color. Imagine you project all points on both rectangles on a single axis; In this case for every point on red square, there is a point in the blue square, that will have the same projection value for the axis, and thus for their projection value 2 differen labels are assigned. Thus given only values of such projection, the best you can do is randomly guess one of two classes. 
 
+Notice that due to the set of training points being finite set, you do not experience this effect for it and thus your training loss can go to zero.
+
 Above example demonstrates that number of neurons in the layer should be selected at least as the number of dimensions, needed to represent the data such that the information is not lost \[too much\].
 
 How to know this number? One idea is to look at [manifold learning](http://scikit-learn.org/stable/modules/manifold.html). 
