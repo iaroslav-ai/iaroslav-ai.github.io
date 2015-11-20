@@ -48,7 +48,7 @@ See [this post](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-
 
 **2.1 Results on real dataset**
 
-Result for 10000 MNIST images: supervised pretraining for 10000 layers network gives MSE loss of around 1e-3. As inputs to the network I provide the images, and as outputs the corresponding labels (numbers 0 - 9). You can see the code of experiment [here](http://iaroslav-ai.github.io/10000layers_net/)
+Result for 10000 MNIST images: supervised pretraining for 10000 layers network gives MSE loss of around 1e-3. As inputs to the network I provide the images, and as outputs the corresponding labels (numbers 0 - 9). You can see the code of experiment [here](https://github.com/iaroslav-ai/10000_layers_net).
 
 **3. You are interested in generalization**
 
