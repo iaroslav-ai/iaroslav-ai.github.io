@@ -31,13 +31,13 @@ Firstly, you can almost always find a neuron that gives different output values 
 
 ![Encoding every training point separately with a single number.](/images/10000layers/Projection_Example.svg)
 
-This assumes that in your dataset you do not have training points which are exactly the same. If that is true, getting the same value of projection for two different points is almost impossible, at least in continuous space. Needless to say though, that such projection encoding would not generalize. 
+This assumes that in your dataset you do not have training points which are exactly the same. If that is true, getting the same value of projection for two different points is almost impossible, at least in continuous space. This can be proven easily, if you assume that your data and projection axis is uniformly distributed, which I leave to the reader. 
 
-Notice that in fully connected neural networks neurons perform projection + non - linearity on top. Thus you can use such neuron to uniquely identify every training point with a single number.
+Notice that in fully connected neural networks neurons perform projection + non - linearity on top. Thus you can use such neuron to uniquely identify every training point with a single number. Needless to say though, that such projection would not allow to generalize. 
 
 ![Encoding every training point separately with a single number.](/images/10000layers/Shallow_Example.svg)
 
-You can replace every training point with such encoding and train shallow neural net with neurons number equal to number of training points. This will necessary give you zero training loss, [see here](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-Deep-Learning/) for details.
+You can replace every training point with such encoding and train shallow neural net with neurons whose number is equal to the number of training points. This will necessary give you zero training loss, [see here](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-Deep-Learning/) for details.
 
 Then you can reshape shallow network into the deep one with the same 0 loss value. 
 To do that, it suffices to have 1 neuron for training point encoding, one neuron for processing, two neurons to carry output, totalling 4 neurons on the layer; see figure below.
