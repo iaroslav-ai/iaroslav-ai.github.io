@@ -48,18 +48,20 @@ See [this post](http://iaroslav-ai.github.io/Local-minimum-is-not-a-problem-for-
 
 **2.1 Results on real dataset**
 
-Yes, here is the result for 10000 MNIST images: 10000 layers, each 4 neurons wide, gives training loss of 1e-5. As inputs to the network I provide the images, and as outputs the corresponding labels (numbers 0 - 9).
+Result for 10000 MNIST images: supervised pretraining for 10000 layers network gives MSE loss of around 1e-3. As inputs to the network I provide the images, and as outputs the corresponding labels (numbers 0 - 9). You can see the code of experiment [here](http://iaroslav-ai.github.io/10000layers_net/)
 
 **3. You are interested in generalization**
 
 Above results show that generalization does not necessary depends on local minimum quality. Thus without any relation to generalization studying local minimum quality is useless.
 
-**4. What should be done to not overfit?**
+**4. Layers can be too thin**
 
-In general, neuron does projection on the axis with some non linearity on top; If you necessary need m dimensions to generalize, you will loose some of these dimension with deep net n neurons wide, if m > n. Thus it would be not possible for such net to implement ground truth dependency between the inputs and outputs simply because information is lost, see one example in the figure below:
+Typically, in neural networks neurons do projection on the vector with some non linearity on top. For a single layer, such neurons can be seen as axes of the space in which inputs to the layer are projected. If you necessary need m dimensions to generalize, you will loose some of these dimension with deep net n neurons wide, if m > n. Thus it would be not possible for such net to implement ground truth dependency between the inputs and outputs simply because information is lost, see one example in the figure below:
 
 ![Encoding every training point separately with a single number is not possible here.](/images/10000layers/Information_Loss.svg)
 
-Here you cannot come up with projection on single vector (reduction to single dimension) such that you do not confuse training points and such that it would generalize to unseen data.
+In above figure instances of classes are sampled from rectangles of respective color. Imagine you project all points on both rectangles on a single axis; In this case for every point on red square, there is a point in the blue square, that will have the same projection value for the axis, and thus for their projection value 2 differen labels are assigned. Thus given only values of such projection, the best you can do is randomly guess one of two classes. 
 
-How to know such dimension? Take a look at [manifold learning](http://scikit-learn.org/stable/modules/manifold.html). 
+Above example demonstrates that number of neurons in the layer should be selected at least as the number of dimensions, needed to represent the data such that the information is not lost \[too much\].
+
+How to know this number? One idea is to look at [manifold learning](http://scikit-learn.org/stable/modules/manifold.html). 
