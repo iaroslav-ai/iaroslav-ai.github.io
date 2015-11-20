@@ -21,7 +21,7 @@ More specifically, you can use part of neurons for data transfer, part for proce
 
 ![Putting shallow network into deep one.](/images/10000layers/Shallow_To_Deep.svg)
 
-Above figure shows described ininitialization scheme for deep fully connected network. Here \\(w\_i\\) denote weights of i-th neuron in initialization shallow net, and \\(a\_i\\) it's output weight in final linear layer. 1s denote connections with weight selected such that input is passed to the output without change, and connections not drawn are set to zero. Essentially shallow net is put into deep net. 
+Above figure shows described ininitialization scheme for deep fully connected network. Here \\(w\_i\\) denote weights of i-th neuron in initialization shallow net, and \\(a\_i\\) it's output weight in final linear layer. 1s denote connections with weight selected such that input is passed to the output without change (coming up with such weights is an easy exercise for a reader), and connections not drawn are set to zero. Essentially shallow net is put into deep net. 
 
 Notice that this kind of initialization is similar in spirit to [this paper](http://arxiv.org/abs/1505.00387), where in a sense deep networks are made more "shallow" by allowing some of the neurons in layer pass the information through them without a change. 
 
