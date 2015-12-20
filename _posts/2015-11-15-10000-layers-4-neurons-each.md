@@ -6,7 +6,7 @@ title: 10000 layers each 4 neurons wide
 
 In this post you will learn that 
 **1.** You can initialize deep net with shallow net;
-**2.** For such initialization, similar to [this paper](http://arxiv.org/pdf/1412.0233.pdf) it can be shown that loss will tend to zero, without spin glass model;
+**2.** For such initialization, similar to [this paper](http://arxiv.org/pdf/1412.0233.pdf) it can be shown that loss will tend to zero as network grows, without spin glass model;
 **3.** It does not make sense to study local minimum quality alone;
 **4.** You don't want layers of your network to be too "thin".
 
