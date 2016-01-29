@@ -10,6 +10,7 @@ I explore some simple approaches for automatic learing of the training algorithm
 
 ... is summarized in the figure below:
 
+![The main idea is to learn the training algorithm.](/images/train-nn-with-nn-part1/Main_Idea.svg)
 
 
 **Conclusion**
