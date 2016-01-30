@@ -7,7 +7,7 @@
   </clipPath>
  </defs>
  <defs class="TextShapeIndex">
-  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11"/>
+  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13"/>
  </defs>
  <defs class="EmbeddedBulletChars">
   <g id="bullet-char-template(57356)" transform="scale(0.00048828125,-0.00048828125)">
@@ -58,9 +58,9 @@
      </g>
      <g class="com.sun.star.drawing.CustomShape">
       <g id="id4">
-       <path fill="rgb(114,159,207)" stroke="none" d="M 8463,8811 L 6939,8811 6939,4620 9987,4620 9987,8811 8463,8811 Z"/>
-       <path fill="none" stroke="rgb(52,101,175)" d="M 8463,8811 L 6939,8811 6939,4620 9987,4620 9987,8811 8463,8811 Z"/>
-       <text class="TextShape"><tspan class="TextParagraph" font-family="Arial, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="7777" y="6932"><tspan fill="rgb(0,0,0)" stroke="none">RNN</tspan></tspan></tspan></text>
+       <path fill="rgb(114,159,207)" stroke="none" d="M 8463,8005 L 6939,8005 6939,5465 9987,5465 9987,8005 8463,8005 Z"/>
+       <path fill="none" stroke="rgb(52,101,175)" d="M 8463,8005 L 6939,8005 6939,5465 9987,5465 9987,8005 8463,8005 Z"/>
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Arial, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="7777" y="6951"><tspan fill="rgb(0,0,0)" stroke="none">RNN</tspan></tspan></tspan></text>
       </g>
      </g>
      <g class="com.sun.star.drawing.CustomShape">
@@ -72,13 +72,13 @@
      </g>
      <g class="com.sun.star.drawing.ConnectorShape">
       <g id="id6">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 5553,6716 L 6509,6716"/>
-       <path fill="rgb(0,0,0)" stroke="none" d="M 6939,6716 L 6489,6566 6489,6866 6939,6716 Z"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 5553,6716 L 6246,6716 6246,6735 6509,6735"/>
+       <path fill="rgb(0,0,0)" stroke="none" d="M 6939,6735 L 6489,6585 6489,6885 6939,6735 Z"/>
       </g>
      </g>
      <g class="com.sun.star.drawing.ConnectorShape">
       <g id="id7">
-       <path fill="none" stroke="rgb(0,0,0)" d="M 9987,6716 L 10875,6716"/>
+       <path fill="none" stroke="rgb(0,0,0)" d="M 9987,6735 L 10646,6735 10646,6716 10875,6716"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 11305,6716 L 10855,6566 10855,6866 11305,6716 Z"/>
       </g>
      </g>
@@ -106,6 +106,17 @@
       <g id="id11">
        <path fill="none" stroke="rgb(0,0,0)" d="M 17999,4175 L 17999,4980"/>
        <path fill="rgb(0,0,0)" stroke="none" d="M 17999,5410 L 18149,4960 17849,4960 17999,5410 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.LineShape">
+      <g id="id12">
+       <path fill="none" stroke="rgb(0,0,0)" d="M 17002,4810 L 2573,4810"/>
+       <path fill="rgb(0,0,0)" stroke="none" d="M 2143,4810 L 2593,4960 2593,4660 2143,4810 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.TextShape">
+      <g id="id13">
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Arial, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="7330" y="4318"><tspan fill="rgb(0,0,0)" stroke="none">Backpropagation</tspan></tspan></tspan></text>
       </g>
      </g>
     </g>
