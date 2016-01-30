@@ -12,5 +12,66 @@ I explore some simple approaches for automatic learing of the training algorithm
 
 ![The main idea is to learn the training algorithm.](/images/train-nn-with-nn-part1/Main_Idea.svg)
 
+Main advances in deep learning come from increase of the size of network, [which reduces the local minimum problem](http://arxiv.org/pdf/1412.0233.pdf), and effective adaptation of the network architecture for the problem at hand (e.g. [convolutional NN](http://www.nature.com/nature/journal/v521/n7553/full/nature14539.html) for computer vision applications). This shows that training algorithms which scale well (allow to train complex models) and which can efficiently adapt predictive model to the learning problem (e.g. select the architecture of NN well) are of great practical interest.
+
+This motivates for the further developement of learning algorithms. In this post I try to automatize search for new learning algorithms, where I cast the problem of coming up with a new training algorithm as a learning problem.
+
+**Formulation as a learning problem**
+
+I learn a training algorithm which takes as input a dataset (set of inputs and desired outputs), and predicts model parameters. To learn such algorithm, I artificially generate a dataset of datasets for training of such algorithm. More specifically, I generate a number of random single layer neural network with fixed number of neurons (ReLU nonlinearity) and for random inputs I sample their outputs; A pair of samples / otputs and network weights is one item in the training dataset. 
+
+It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, this means that if one comes up with the algorithm which is good for current dataset it will also work fine for "real" data.
+
+**RNN approach**
+
+Recurrent neural network appear to be well suited for the dataset at hand, as they can be applied to datasets of different size. 
+
+During training I feed pairs of inputs / outputs one by one to RNN, and after single pass over the dataset I reshape outputs of RNN into neural network weights, where NN has a single hidden layer and fixed number of neurons. Then I compute the loss of such neural network on separate dataset; I minimize mean loss over all predicted networks by backpropagation.
+
+This way I directly train RNN to predict models which will have good generalization. The approach is summarized in the figure below.
+
+![Algorithm trained to predict models with good generalization.](/images/train-nn-with-nn-part1/RNN_Generalization.svg)
+
+**Results with RNN**
+
+Results were generated using [this](https://github.com/iaroslav-ai/train_dnn_with_dnn/) Theano code and are summarized in the table below:
+
+Not so great, huh? Lets see why this is happening.
+
+**Why RNN fails**
+
+... is because single layer network representation is not unique. For example, order of neurons can be permuted in the matrix of neuron weights, which will not change network outputs, but will give different network representation, see figure below:
+
+![Non uniqueness of the neural netowrk.](/images/train-nn-with-nn-part1/NN_not_unique.svg)
+
+In above figure every row of X corresponds to a single training point.
+
+Above means that for a input dataset there are many output weights, all of which are "correct". This would simply mean that algorithm would try to predict something close to the mean of outputs, which is likely incorrect:
+
+![Mean of correct outputs is not necessary correct.](/images/train-nn-with-nn-part1/RNN_IncorrectMean.svg)
+
+Thus one would expect that for models with unique representation RNN or other models will perform better.
+
+**Predicting uniquely defined models**
+
+To verify reasoning in previous section, I try a simplified setting where I train SVM (as it is easier to trian) to predict result of L2 linear regression. It is well known that due to convexity of L2 linear regression for a given dataset corresponding model is unique; Results for linear regerssion are given below:
+
+Now this is better! Lets try "uniqifying" the predicted NN and see what results are (still using SVM):
+
+This looks better, however gradient descent still wins:
+
+This is due to the fact that RNN or SVM models are not well adapted to the training task. For example, for exact L2 regression solutions is:
+
+$$ w = (X^T X)^{-1}(X^T y) $$
+
+Notice that dependency between \\(w\\) and \\(X,y\\) is strongly non - linear, and thus would require large amount of data and support vectors of SVM to represent. 
+
+Furthermore, it is known that training small neural networks to global optimality is [NP hard task](https://people.csail.mit.edu/rivest/pubs/BR93.pdf), which would mean that exponential size training SVM models would be required. However, one can still hope that decent generalization (but not the best one) can be achieved with polynomial sized models.
+
+**Predicting uniquely defined models with deep RNN**
+
+Lets throw the heavy machinery of deep learning on the training task and see what happens:
+
 
 **Conclusion**
+Learning training algorithms is hard to attack directly, thus different approach needs to be taken. It is known that gradient descent works fine in practice; Thus starting from vanilla gradient descent, I will train neural networks with reinforcement learning to tune gradient descent parameters and improve its random initialization.
