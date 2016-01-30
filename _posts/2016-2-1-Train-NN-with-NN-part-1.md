@@ -14,7 +14,7 @@ I explore some simple approaches for automatic learing of the training algorithm
 
 Main advances in deep learning come from increase of the size of network, [which reduces the local minimum problem](http://arxiv.org/pdf/1412.0233.pdf), and effective adaptation of the network architecture for the problem at hand (e.g. [convolutional NN](http://www.nature.com/nature/journal/v521/n7553/full/nature14539.html) for computer vision applications). This shows that training algorithms which scale well (allow to train complex models) and which can efficiently adapt predictive model to the learning problem (e.g. select the architecture of NN well) are of great practical interest.
 
-This motivates for the further developement of learning algorithms. In this post I try to automatize search for new learning algorithms, where I cast the problem of coming up with a new training algorithm as a learning problem.
+In this post I try to automatize search for new learning algorithms, where I cast the problem of coming up with a new training algorithm as a learning problem.
 
 **Formulation as a learning problem**
 
