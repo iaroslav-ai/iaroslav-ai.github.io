@@ -22,9 +22,7 @@ I learn a training algorithm which takes as input a dataset (set of inputs and d
 
 It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, then algorithm which works nicely for artificial dataset will also work good for "real" data.
 
-**RNN approach**
-
-Recurrent neural network appear to be well suited for the dataset at hand, as they can be applied to datasets of different size. 
+**RNN trained to achieve good generalization**
 
 During training I feed pairs of inputs / outputs one by one to RNN, and after single pass over the dataset I reshape outputs of RNN into neural network weights, where NN has a single hidden layer and fixed number of neurons. Then I compute the loss of such neural network on separate dataset; I minimize mean loss over all predicted networks by backpropagation.
 
