@@ -20,7 +20,7 @@ This motivates for the further developement of learning algorithms. In this post
 
 I learn a training algorithm which takes as input a dataset (set of inputs and desired outputs), and predicts model parameters. To learn such algorithm, I artificially generate a dataset of datasets for training of such algorithm. More specifically, I generate a number of random single layer neural network with fixed number of neurons (ReLU nonlinearity) and for random inputs I sample their outputs; A pair of samples / otputs and network weights is one item in the training dataset. 
 
-It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, this means that if one comes up with the algorithm which is good for current dataset it will also work fine for "real" data.
+It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, then if one comes up with the algorithm which is good for current dataset it will also work fine for "real" data.
 
 **RNN approach**
 
