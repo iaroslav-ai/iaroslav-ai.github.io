@@ -72,6 +72,6 @@ Furthermore, it is known that training small neural networks to global optimalit
 
 Lets throw the heavy machinery of deep learning on the training task and see what happens:
 
-
 **Conclusion**
-Learning training algorithms is hard to attack directly, thus different approach needs to be taken. It is known that gradient descent works fine in practice; Thus starting from vanilla gradient descent, I will train neural networks with reinforcement learning to tune gradient descent parameters and improve its random initialization.
+
+Learning training algorithms is hard to attack with standard appraoches, thus different strategy needs to be taken. It is known that gradient descent works fine in practice; Thus starting from vanilla gradient descent, I will train neural networks with reinforcement learning to tune gradient descent parameters and improve its random initialization.
