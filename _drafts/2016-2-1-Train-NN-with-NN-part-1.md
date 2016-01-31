@@ -22,6 +22,16 @@ I learn a training algorithm which takes as input a dataset (set of inputs and d
 
 It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, then algorithm which works nicely for artificial dataset will also work good for "real" data.
 
+**Predicting models with SVM**
+
+Firstly I try a simple setting where I train SVM to predict linear model. I flatten the dataset into feature vector, and assign linear model weights as outputs. Results for linear regerssion are given below:
+
+Now this is better! Lets try "uniqifying" the predicted NN and see what results are (still using SVM):
+
+This looks better, however gradient descent still wins:
+
+This is due to the fact that RNN or SVM models are not well adapted to the training task. For example, for exact L2 regression solutions is:
+
 **RNN trained to achieve good generalization**
 
 During training I feed pairs of inputs / outputs one by one to RNN, and after single pass over the dataset I reshape outputs of RNN into neural network weights, where NN has a single hidden layer and fixed number of neurons. Then I compute the loss of such neural network on separate dataset; I minimize mean loss over all predicted networks by backpropagation.
@@ -50,15 +60,7 @@ Above means that for a input dataset there are many output weights, all of which
 
 Thus one would expect that for models with unique representation RNN or other models will perform better.
 
-**Predicting uniquely defined models**
 
-To verify reasoning in previous section, I try a simplified setting where I train SVM (as it is easier to trian) to predict result of L2 linear regression. It is well known that due to convexity of L2 linear regression for a given dataset corresponding model is unique; Results for linear regerssion are given below:
-
-Now this is better! Lets try "uniqifying" the predicted NN and see what results are (still using SVM):
-
-This looks better, however gradient descent still wins:
-
-This is due to the fact that RNN or SVM models are not well adapted to the training task. For example, for exact L2 regression solutions is:
 
 $$ w = (X^T X)^{-1}(X^T y) $$
 
