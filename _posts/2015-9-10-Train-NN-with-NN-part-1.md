@@ -22,16 +22,6 @@ I learn a training algorithm which takes as input a dataset (set of inputs and d
 
 It would be best if I would use real data, but it would take way too much time to scrape all possible datasets on the internet. Furthermore, if one assumes that "real" data generating models are subset of uniformly generated ones, then algorithm which works nicely for artificial dataset will also work good for "real" data.
 
-**Predicting models with SVM**
-
-Firstly I try a simple setting where I train SVM to predict linear model. I flatten the dataset into feature vector, and assign linear model weights as outputs. Results for linear regerssion are given below:
-
-Now this is better! Lets try "uniqifying" the predicted NN and see what results are (still using SVM):
-
-This looks better, however gradient descent still wins:
-
-This is due to the fact that RNN or SVM models are not well adapted to the training task. For example, for exact L2 regression solutions is:
-
 **RNN trained to achieve good generalization**
 
 During training I feed pairs of inputs / outputs one by one to RNN, and after single pass over the dataset I reshape outputs of RNN into neural network weights, where NN has a single hidden layer and fixed number of neurons. Then I compute the loss of such neural network on separate dataset; I minimize mean loss over all predicted networks by backpropagation.
@@ -42,9 +32,7 @@ This way I directly train RNN to predict models which will have good generalizat
 
 **Results with RNN**
 
-Results were generated using [this](https://github.com/iaroslav-ai/train_dnn_with_dnn/) Theano code and are summarized in the table below:
-
-Not so great, huh? Lets see why this is happening.
+Results were generated using [this](https://github.com/iaroslav-ai/train_dnn_with_dnn/) Theano implementation; Surprisingly, I get results which are not much better than random guessing. Lets see why this is happening.
 
 **Why RNN fails**
 
@@ -60,17 +48,27 @@ Above means that for a input dataset there are many output weights, all of which
 
 Thus one would expect that for models with unique representation RNN or other models will perform better.
 
+**Predicting models with SVM**
 
+Now I try a simplified setting where I train SVM to predict linear model (3 weights + bias). I flatten the dataset into feature vector, and assign linear model weights as outputs. The average testing coefficient of determination that I get is 0.8, for \\(2^{14}\\) datasets.
+
+Now this is better! Lets try "uniqifying" the predicted NN and see what results are (still using SVM, same amont of data). The average testing coefficient of determination that I get is 0.5.
+
+This looks better, however still in our simple setting a large amount of datasets and thus complicated SVM are requried; Furthermore, one can observe from the code that size of dataset and SVM need to grow exponentially to improve significantly the coefficient of determination.
+
+This is due to the fact that RNN or SVM models are not well adapted to the training task. For example, for exact L2 regression solutions is:
 
 $$ w = (X^T X)^{-1}(X^T y) $$
 
 Notice that dependency between \\(w\\) and \\(X,y\\) is strongly non - linear, and thus would require large amount of data and support vectors of SVM to represent. 
 
-Furthermore, it is known that training small neural networks to global optimality is [NP hard task](https://people.csail.mit.edu/rivest/pubs/BR93.pdf), which would mean that exponential size training SVM models would be required. However, one can still hope that decent generalization (but not the best one) can be achieved with polynomial sized models.
+Furthermore, it is known that training small neural networks to global optimality is [NP hard task](https://people.csail.mit.edu/rivest/pubs/BR93.pdf), which would mean that exponential size training SVM models would be required to train them. However, one can still hope that decent generalization (but not the best one) can be achieved with polynomial sized models.
 
 **Predicting uniquely defined models with deep RNN**
 
-Lets throw the heavy machinery of deep learning on the training task and see what happens:
+Lets throw the heavy machinery of deep learning on the training task and see what happens!
+
+[in progress ...]
 
 **Conclusion**
 
