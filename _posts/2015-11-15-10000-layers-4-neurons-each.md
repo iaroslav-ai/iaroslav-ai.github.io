@@ -60,7 +60,7 @@ Typically, in neural networks neurons do projection on the vector with some non 
 
 ![Encoding every training point separately with a single number is not possible here.](/images/10000layers/Information_Loss.svg)
 
-In above figure instances of classes are sampled from rectangles of respective color. Imagine you project all points on both rectangles on a single axis; In this case for every point on red square, there is a point in the blue square, that will have the same projection value for the axis, and thus for single projection value 2 different labels are assigned. Thus given only value of such projection, the best you can do is randomly guess one of two classes. 
+In above figure instances of classes are sampled from rectangles of respective color. Imagine you project all points on both rectangles on a single axis; In this case for every point on red square, there is a point in the blue square, that will have the same projection value for the axis, and thus for single projection value 2 different labels are assigned. Thus given only value of such overlapping projection, the best you can do is randomly guess one of two classes. 
 
 Notice that due to the set of training points being finite set, probability of projection values to collide is usually almost zero and thus you do not experience this effect, which allows for your training loss to go to zero.
 
