@@ -7,7 +7,9 @@ title: Why AI would not take over the world
 One popular view on developments in the AI field is that at some point it would lead to a scary scenario when self improving AI rebels against humanity and takes over the planet in order to allocate more resources for itself.
 In this post I argue that under the common assumptions self improving AI is more likely to end up in a vegetable - like state than to turn against humanity.
 
-First lets assume that such AI is created for some purpose, which is determined by its utility function. Such utility function assigns some numerical value which characterizes the "goodness" of a certain action AI can make. Then the objective of such AI is to maximize the output of its utility function by performing certain actions.
+The main idea is that AI will always be able to obtain more reward by simply modifying its objective (to return infinite reward) rather than take over humans (and obtain finite reward).
+
+I assume that for any AI its actions are determined by its utility function. Such utility function allows to compate the "goodness" of a certain action AI can make to other actions. Then the objective of such AI is to maximize the output of its utility function by performing certain "best" actions.
 
 For example, imagine an AI whose purpose is to collect stamps. Then its utility function could be the expected amount of stamps collected when a certain set of actions is performed.
 
