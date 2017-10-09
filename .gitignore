@@ -14,3 +14,5 @@ dist/
 .*.swp
 
 .idea/
+Gemfile*
+_site/
