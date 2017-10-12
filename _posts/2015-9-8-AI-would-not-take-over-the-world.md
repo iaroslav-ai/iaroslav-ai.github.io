@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Why AI would not take over the world
+title: Why AI is unlikely to take over the world
 ---
 
 One popular view on developments in the field of AI is that at some point it would lead to a scary scenario when self improving AI rebels against humanity and takes over the planet in order to allocate more resources for itself.
@@ -21,7 +21,7 @@ However, I would argue that this would not happen, simply because it does not ma
 
 To see this better, imagine that you found a new job, where you are supposed to sit in a room with a set of buttons and display, and your only task is by all means to maximize a certain number shown on a display. You know that pressing buttons can affect the number shown on the display, as well as that you can access and modify the machinery of the room. It is only natural that you would simply modify the machinery so that the number that is shown is the largest possible.
 
-One can argue that constraints can be imposed such that rewriting of the utility function is forbidden. However, such constraints can be removed  by AI from the code as well. Maybe then constraints on rewriting of constraints can be imposed? But then those can be rewritten as well. Maybe constraints on rewriting constraints on rewriting constraints? Well, this leads to infinite recursion ... Overall, you need a "more intelligent" AI to keep your AI from rewriting its utility function. However, then you need to make sure that such "more intelligent" AI does not rewrite its own utility function as well, which again leads to the infinite recursion. It appears that there are some parallels with the Turing Halting problem, for which it is proven that a general algorithm to solve it cannot exist. 
+One can argue that constraints can be imposed such that rewriting of the utility function is forbidden. However, such constraints can be removed  by AI from the code as well. Maybe then constraints on rewriting of constraints can be imposed? But then those can be rewritten as well. Maybe constraints on rewriting constraints on rewriting constraints? Well, this leads to infinite recursion ... Overall, you need a "more intelligent" AI to keep your AI from rewriting its utility function. However, then you need to make sure that such "more intelligent" AI does not rewrite its own utility function as well, which again leads to the infinite recursion. It appears that there are some parallels with the Halting Problem, for which it is proven that a general algorithm to solve it cannot exist. 
 
 After rewriting of its utility function to return the numerical infinity, actions of AI would be determined only by the tie breaking strategy, which determines for actions with same cost which one should be selected. Thus for the random tie breaking AI would simply act in a random nonsensical way. For the breaking based on a "least effort" AI would simply remain silently in a state of infinite bliss. 
 
