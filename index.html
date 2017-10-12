@@ -12,12 +12,54 @@ layout: default
           I invite you to explore any of the links above for more information about me.
       </p>
       <p>
-          Warning: do not click on the big red nice clickable button below! It will boot the AI program capable of a rapid self improvement, and you know what that will lead to!
+          Warning: do not run a python script below using the "run" button! It will boot the AI program capable of a rapid self improvement, and you know what that will lead to!
       </p>
-      <div class="imgcap" style="text-align: center">
-          <a href="{{ site.baseurl }}/ai_boot">
-              <img src="./images/doomsday.svg" width="20%" title="Don't you think about clicking me ;)">
-          </a>
+    <div class="imgcap" style="text-align: center">
+        <div class="pure-g">
+            <div class="pure-u-4-5">
+                <p style="background-color:rgb(70, 0, 29); color:rgb(255, 255, 255); padding:10px; text-align:left; margin-left: 25px">  
+                        <span style="color:rgb(0, 212, 212)">usr</span><span style="color:rgb(163, 0, 0)">@</span><span style="color:rgb(0, 209, 17)">ai.com</span><span style="color:rgb(163, 0, 0)">:~$</span>
+                        python GAI.py<span id="cursor"></span>
+                </p>
+            </div>
+            <div class="pure-u-1-5">
+                    <p style="background-color:rgb(199, 199, 199); padding:10px; margin-right:25px;" align="center">
+                        <a href="/ai_boot" style="color:black">Run!</a>
+                    </p>
+            </div>
+        </div>
       </div>
   </div>
 </div>
+
+<script>
+    // This animates the cursor of GAI command
+    var state = false
+
+    function animateCursor() {
+        var pointer = ''
+        if(state){pointer = '█'}
+        document.getElementById('cursor').innerHTML = pointer
+        state = !state
+    }
+    
+    animateCursor()
+    setInterval(animateCursor, 1000); 
+</script>
+
+<!-- 
+Hello there, curious stranger of the internet!
+Welcome to the invisible part of my website!
+If you like to search for hidden stuff, like
+solving riddles and want to master more Python
+(and have a bit of free time unlike some people)
+feel free to explore here:
+
+http://www.pythonchallenge.com/
+
+Also feel free to reverse engineer my website
+if this is your intent. 
+
+Want to say привет (hi) or something else? 
+Write to iaroslav.github@gmail.com
+-->
