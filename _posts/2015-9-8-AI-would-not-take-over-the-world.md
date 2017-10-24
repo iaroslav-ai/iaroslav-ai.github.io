@@ -5,7 +5,7 @@ title: Why AI is unlikely to take over the world
 ---
 
 One popular view on developments in the field of AI is that at some point it would lead to a scary scenario when self improving AI rebels against humanity and takes over the planet in order to allocate more resources for itself.
-In this post I argue that under common assumptions a self improving AI is more likely to end up in a vegetable - like state than to turn against humanity.
+In this post I argue that under common assumptions a self improving AI is rather unlikely to do so.
 
 My main idea is that AI will always be able to obtain more reward by simply modifying its objective (to return infinite reward) rather than take over humans (and obtain finite reward).
 
