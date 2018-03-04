@@ -1,0 +1,494 @@
+---
+layout: default
+---
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./model/modelestimator.js"></script>
+<script src="./b64url.js"></script>
+<script src="./dsp.js"></script>
+<script src="./keras.min.js"></script>
+<script src="./angular.min.js"></script>
+<script src="./wavesurfer.min.js"></script>
+<script src="./audiofile.js"></script>
+<script src="./wavesurfer.spectrogram.min.js"></script>
+<script src="./d3.min.js"></script>
+<script src="./p5.min.js"></script>
+<script src="./p5.sound.min.js"></script>
+
+<p>The app is inspired by <a href="http://www.peterjbentley.com/heartchallenge/">Classifying Heart Sounds Challenge</a>. </p>
+
+<p>Citing from the challenge website: "According to the World Health Organisation,
+    cardiovascular diseases (CVDs) are the number one cause of death globally:
+    more people die annually from CVDs than from any other cause.
+    An estimated 17.1 million people died from CVDs in 2004, representing 29% of
+    all global deaths. Of these deaths, an estimated 7.2 million were due to coronary
+    heart disease. Any method which can help to detect signs of heart disease could
+    therefore have a significant impact on world health."</p>
+
+<p>
+    Select one of the example audio files with heart beat or upload your own,
+    and then click on "Diagnose" button.
+</p>
+
+<div ng-app="heartSoundList" ng-controller="angularController">
+    <table style="width:100%;margin:5px" border="1">
+        <tr align="center">
+            <td>Click to select</td>
+            <td>Preview</td>
+        </tr>
+        <tr ng-repeat="x in sounds" align="center">
+            <td style="vertical-align: middle;"> <a href="" ng-click="selectItem($index)">{(x.name)}</a> </td>
+            <td style="vertical-align: middle;"><audio ng-src="{(x.url)}" controls></audio></td>
+        </tr>
+    </table>
+
+    <input type="file" id="fileUploaderInv" style="display: none" ng-model="file.data"
+       file-select="data"
+       file-loaded="addFile()">
+
+    <button ng-click="doNothing()" style="display: none" id="refreshAngular"></button>
+
+    <button onclick="getElementById('fileUploaderInv').click();">
+        <i class="fa fa-upload" style="font-size:48px"></i>Upload
+    </button>
+    <!--<button ng-click="recordMic()">
+        <i id="micButton" class="fa fa-microphone" style="font-size:48px"></i>Record
+    </button> -->
+    <button ng-click="makeEstimation()">
+        <i id="aiButton" class="fa fa-bolt" style="font-size:48px"></i>Diagnose
+    </button>
+
+</div>
+
+<!--
+<button onclick="playAudio()">Play</button>
+<button onclick="stopAudio()" id="stopbutton">Stop</button>
+-->
+
+<p>Waveform of selected audio: <i id="selectedAudio"></i></p>
+<div id="waveform"></div>
+
+<p>Annotation of audio by AI diagnostic system:</p>
+<div id="ai_output"></div>
+
+<p>Conclusion: <strong id="ai_summary"></strong></p>
+
+<p>Warning: the information presented and generated on this page is for
+    entertainment purposes only. You should not rely on this app alone
+    for your diagnosis. If there are errors or unexpected behavior try
+    opening this page in a different browser. </p>
+
+<script>
+    var container = d3.select("#ai_output")
+        .append('svg')
+        .attr('width', "100%")
+        .attr('height', "100")
+
+    function make_summary(data){
+        var counts = {}
+        var mode = data[0]
+
+        for(var i=0; i<data.length; i++){
+            var e = data[i];
+
+            if(!(e in counts)){
+                counts[e] = 0
+            }
+
+            counts[e] += 1
+            if(counts[e] > counts[mode]){
+                mode = e
+            }
+        }
+
+        var sel = d3.select("#ai_summary")
+
+        if(mode == "Artifact"){
+            sel.text(
+                "It appears that the audio record is corrupted or does not contain heart beat sound. Please record again."
+            )
+        }
+
+        if(mode == "Normal"){
+            sel.text(
+                "The heart beat presented in the audio sounds OK!"
+            )
+        }
+
+        if(mode == "Murmur" || mode == "Extra heart sounds"){
+            sel.text(
+                "Abnormalities detected in the audio - please consult with a cardiologist."
+            )
+        }
+
+    }
+
+    // Visualization code
+    function draw_data(data, categories, container){
+        // convert estimations to classes
+        var height_step = 100.0 / categories.length
+        var width_step = 100.0 / data.length
+
+        // visualization data
+        var vis_data = []
+
+        var width = 0.0
+        for(var di=0; di<data.length; di++){
+            var d = data[di]
+            var height = 0.0
+            for(var ci=0; ci<categories.length; ci++){
+                var c = categories[ci]
+
+                // visualization color
+                var color = 0.0
+                if(c == d){
+                    color = 1.0
+                }
+
+                var vis = {
+                    "x": width+"%", "y": height+"%",
+                    "width": width_step+"%", "height": height_step+"%",
+                    "color": color, "category": c
+                    }
+
+                vis_data.push(vis)
+                height += height_step
+            }
+            width += width_step
+        }
+
+        // get coordinates for the text
+        var text_viz = []
+        var height = height_step / 2 + height_step*0.2
+        for(var ci=0; ci<categories.length; ci++){
+            text_viz.push({"x": "1%", "y": height+"%", "value": categories[ci]})
+            height += height_step
+        }
+
+        // Add visualization of the data itself
+        container.selectAll("rect").remove()
+        container.selectAll("rect")
+            .data(vis_data)
+            .enter()
+            .append('rect')
+            .attr('x', (d)=>{return d['x']})
+            .attr('y', (d)=>{return d['y']})
+            .attr('width', (d)=>{return d['width']})
+            .attr('height', (d)=>{return d['height']})
+            .style("fill", (d)=>{
+                if(d['color'] == 0){
+                    return "white"
+                }
+                return "#F08080"
+            })
+            .style('text-anchor', "middle")
+
+        // Add visualization of the data itself
+        container.selectAll("text").remove()
+        container.selectAll("text")
+            .data(text_viz)
+            .enter()
+            .append('text')
+            .attr('x', (d)=>{return d['x']})
+            .attr('y', (d)=>{return d['y']})
+            .text((d)=>{
+                return d["value"]
+            })
+    }
+
+
+    // Audio player
+    var wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: 'violet',
+        progressColor: 'purple'
+    });
+
+    function playAudio(){
+        wavesurfer.playPause();
+    }
+
+    function stopAudio(){
+        wavesurfer.stop();
+    }
+
+    // Angular app
+    var app = angular.module("heartSoundList", []);
+
+    app.config([
+      '$interpolateProvider', function($interpolateProvider) {
+        return $interpolateProvider.startSymbol('{(').endSymbol(')}');
+      }
+    ]);
+
+    // File loading directive
+    app.directive('fileSelect', ['$window', function ($window) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, el, attr, ctrl) {
+                var fileReader = new $window.FileReader();
+                var fileName = null;
+
+                fileReader.onload = function () {
+                    var result = fileReader.result
+
+                    ctrl.$setViewValue({data: result, name: fileName});
+
+                    if ('fileLoaded' in attr) {
+                        scope.$eval(attr['fileLoaded']);
+                    }
+                };
+
+                fileReader.onprogress = function (event) {
+                    if ('fileProgress' in attr) {
+                        scope.$eval(attr['fileProgress'],
+                        {'$total': event.total, '$loaded': event.loaded});
+                    }
+                };
+
+                fileReader.onerror = function () {
+                    if ('fileError' in attr) {
+                        scope.$eval(attr['fileError'],
+                        {'$error': fileReader.error});
+                    }
+                };
+
+                var fileType = attr['fileSelect'];
+
+                el.bind('change', function (e) {
+                    fileName = e.target.files[0].name;
+
+                    if (fileType === '' || fileType === 'text') {
+                        fileReader.readAsText(e.target.files[0]);
+                    } else if (fileType === 'data') {
+                        fileReader.readAsDataURL(e.target.files[0]);
+                    }
+                });
+            }
+        };
+    }]);
+    var model = new modelEstimator()
+
+    model.load({"weights": "./model/model.bin"}, function(){})
+
+    var selected_url = null;
+    var upload_idx = 0;
+
+    app.config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data|chrome-extension):/);
+    }]);
+
+    var mic = null;
+    var recorder = null;
+
+    // HERE ARE SUPPORT FUNCTIONS FOR P5.JS TO SAVE AUDIO AS DATA URL
+      // helper methods to save waves
+    function interleave(leftChannel, rightChannel) {
+        var length = leftChannel.length + rightChannel.length;
+        var result = new Float32Array(length);
+        var inputIndex = 0;
+        for (var index = 0; index < length;) {
+          result[index++] = leftChannel[inputIndex];
+          result[index++] = rightChannel[inputIndex];
+          inputIndex++;
+        }
+        return result;
+    }
+    function writeUTFBytes(view, offset, string) {
+        var lng = string.length;
+        for (var i = 0; i < lng; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i));
+        }
+    }
+
+    saveSound = function (soundFile, callback) {
+        var leftChannel, rightChannel;
+        leftChannel = soundFile.buffer.getChannelData(0);
+        // handle mono files
+        if (soundFile.buffer.numberOfChannels > 1) {
+          rightChannel = soundFile.buffer.getChannelData(1);
+        } else {
+          rightChannel = leftChannel;
+        }
+        var interleaved = interleave(leftChannel, rightChannel);
+        // create the buffer and view to create the .WAV file
+        var buffer = new window.ArrayBuffer(44 + interleaved.length * 2);
+        var view = new window.DataView(buffer);
+        // write the WAV container,
+        // check spec at: https://ccrma.stanford.edu/courses/422/projects/WaveFormat/
+        // RIFF chunk descriptor
+        writeUTFBytes(view, 0, 'RIFF');
+        view.setUint32(4, 36 + interleaved.length * 2, true);
+        writeUTFBytes(view, 8, 'WAVE');
+        // FMT sub-chunk
+        writeUTFBytes(view, 12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        // stereo (2 channels)
+        view.setUint16(22, 2, true);
+        view.setUint32(24, 44100, true);
+        view.setUint32(28, 44100 * 4, true);
+        view.setUint16(32, 4, true);
+        view.setUint16(34, 16, true);
+        // data sub-chunk
+        writeUTFBytes(view, 36, 'data');
+        view.setUint32(40, interleaved.length * 2, true);
+        // write the PCM samples
+        var lng = interleaved.length;
+        var index = 44;
+        var volume = 1;
+        for (var i = 0; i < lng; i++) {
+          view.setInt16(index, interleaved[i] * (32767 * volume), true);
+          index += 2;
+        }
+        var blob = new Blob([view], {'type': 'audio/wav'});
+        var a = new FileReader();
+        a.onload = function(e) {callback(e.target.result);}
+        a.readAsDataURL(blob);
+    };
+    // HERE ARE SUPPORT FUNCTIONS FOR P5.JS TO SAVE AUDIO AS DATA URL
+
+    // Main app controller
+    app.controller("angularController", function($scope) {
+        $scope.sounds = [
+            {'name': 'artifact.wav', 'url': './samples/artifact/artifact.wav'},
+            {'name': 'normal.wav', 'url': './samples/normal/normal.wav'},
+            {'name': 'murmur.wav', 'url': './samples/murmur/murmur.wav'},
+            {'name': 'extra_heart_sounds.wav', 'url': './samples/extrahls/extra_heart_sounds.wav'},
+        ]
+        $scope.doNothing = function (){
+            // this is necessary for updates working properly in angular component.
+        }
+        $scope.addFile = function (){
+            var data = {'url': $scope.file.data['data'], 'name': $scope.file.data['name']}
+            upload_idx+=1;
+            $scope.sounds.push(data)
+            document.getElementById("refreshAngular").click();
+        }
+        $scope.selectItem = function(ix){
+            selected_url = $scope.sounds[ix]
+            document.getElementById('selectedAudio').innerHTML=selected_url['name']
+            wavesurfer.load(selected_url['url']);
+        }
+
+        $scope.recordMic = function(){
+
+            if(mic == null){
+                // create an audio in
+                mic = new p5.AudioIn();
+
+                // users must manually enable their browser microphone for recording to work properly!
+                mic.start();
+
+                // create a sound recorder
+                recorder = new p5.SoundRecorder();
+
+                // connect the mic to the recorder
+                recorder.setInput(mic);
+
+                // create an empty sound file that we will use to playback the recording
+                soundFile = new p5.SoundFile();
+
+                recorder.record(soundFile);
+
+                d3.select("#micButton")
+                    .style('color', "red")
+
+            }else{
+                recorder.stop(); // stop recorder, and send the result to soundFile
+                mic.stop()
+                var url = saveSound(soundFile, (url)=>{
+                    var date = new Date().toLocaleString();
+                    var data = {'url': url, 'name': date+'.wav'}
+                    upload_idx+=1;
+                    $scope.sounds.push(data)
+                    document.getElementById("refreshAngular").click();
+                }); // save file
+                mic = null;
+                recorder = null;
+                soundFile = null;
+
+                d3.select("#micButton")
+                    .style('color', "black")
+            }
+        }
+        $scope.makeEstimation = function(){
+            if(selected_url == null){
+                alert("Please select, upload or record an audio first.")
+                return;
+            }
+
+            d3.select("#aiButton")
+                .style('color', "red")
+            var request = new AudioFileRequest(selected_url['url'], true, 'wav');
+            request.onSuccess = function(decoded) {
+                var sound_seq = decoded.channels[0]
+
+                // chunkify here
+                var x = []
+                var xx = []
+
+                // split audio wave information into blocks of 4096
+                for(var i=0; i<sound_seq.length; i++){
+                    if(i % 4096 == 0 && x.length > 0){
+                        xx.push(x)
+                        x = []
+                    }
+                    x.push(sound_seq[i])
+                }
+
+                var X = []
+
+                // split audio into subsequences; eg [0], [0, 1], [0, 1, 2] ...
+                // this is necessary to make estimations for different blocks
+                for(var i=0; i<xx.length; i++){
+                    var sl = xx.slice(0, i+1)
+                    X.push(sl)
+                }
+
+                model.predict(X, function(yp, err){
+                    var categories = ['Artifact', 'Normal', 'Murmur', 'Extra heart sounds']
+
+                    // transform to d3.js
+                    draw_data(yp, categories, container)
+
+                    // make inferences here on estimations here
+                    make_summary(yp)
+
+                    d3.select("#aiButton")
+                        .style('color', "black")
+
+                })
+            }
+            request.onFailure = function() {
+                // Something went wrong
+            }
+            request.send();
+        }
+    });
+
+
+    function run_new(){
+    }
+
+</script>
+
