@@ -53,7 +53,7 @@ In order to proceed, I first specify a widely used formulation of training of th
 
 I assume that some data is given in the form of the matrix \\(X \in R^{n \times m}\\) (locations of data points) and a vector \\(Y \in R^{n} \\) (values to fit at points \\(X\\)). Outputs of such network for every training point I write as \\( f(X, W) \to R^{n} \\), with net parameters denoted as \\( W \in R^{k} \\). I formulate the learning problem in the vector form as the following optimization problem:
 
-$$ \min\limits\_{W \in R^{k}} || f(X,W) - Y ||\_2^2\label{eq:main}$$
+$$ \min\limits_{W \in R^{k}} || f(X,W) - Y ||_2^2\label{eq:main}$$
 
 ### Shallow Networks: in Between Two Extremes
 
@@ -61,9 +61,9 @@ We start with shallow networks, properties of which we will use to show some int
 
 Shallow network consists of a single layer of hidden neurons. Let the output of neuron for some input \\( x \in R^{m} \\) and its parameters \\( w \in R^{m} \\) be denoted as a function \\( g(x,w) \to R \\). I define the output of a shallow network for some input \\(x \in R^{m} \\) to be a linear combination of \\(u\\) neuron outputs:
 
-$$ f(x,W) = \sum\_{i \in 1 ... u} g\_i(x,w\_i) s\_i $$
+$$ f(x,W) = \sum_{i \in 1 ... u} g_i(x,w_i) s_i $$
 
-where values of \\( w\_i \\) and \\(s\_i\\) are stored in the vector \\(W\\).
+where values of \\( w_i \\) and \\(s_i\\) are stored in the vector \\(W\\).
 
 Due to the way the output of the shallow neural network is computed its training is a non-convex optimization problem. Due to this property, training of a neural network suffer from the local minimum problem.
 
@@ -72,18 +72,18 @@ For convenience, let \\(G \in R^{n \times u} \\) denote separate outputs of neur
 Imagine that I fix parameters of every of \\(m\\) neurons of the shallow network. Then the training optimization problem specifies to:
 
 $$
-\min\limits\_{s \in R^{u}} || G s - Y ||\_2^2 \label{eq:lin-fxnn}
+\min\limits_{s \in R^{u}} || G s - Y ||_2^2 \label{eq:lin-fxnn}
 $$
 
 All of a sudden, the learning problem becomes convex! This means that it can always be solved to the global optimality with the gradient descent over \\(s \in R^{u}\\). Moreover, its solution is always an upper bound on any local minimum of the original training problem achieved from fixed weights of the network. This means that if we are able to give some upper bound on a solution of above problem, it will hold for the non-convex one. 
 
 There are two extreme cases for shallow neural networks with fixed neurons, which define how bad / good such networks can fit the data.
 
-In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points - \\( ||Y||\_2^2 \\). Furthermore, if a bias can be additionally added to the expression inside the norm in \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
+In general, you can always set vector \\(s\\) to be all zeros, and then the worst objective value of \\(\eqref{eq:lin-fxnn}\\) would be the sum of squared values of data points - \\( &#124;&#124;Y&#124;&#124;_2^2 \\). Furthermore, if a bias can be additionally added to the expression inside the norm in \\(\eqref{eq:lin-fxnn}\\), the worst objective becomes sum of squared deviations of data values from the mean.
 
 On the other side, consider a case when the number of neurons is equal to the number of data points. Then \\(G\\) becomes a square matrix. Given that the determinant of \\(G\\) is non zero (which will be shown to hold in practice), solution to \\(\eqref{eq:lin-fxnn}\\) can be found by simply solving a system of linear equations \\(G s = Y\\). This in turn means that the objective value for a solution \\(s\\) would be zero. As this is an upper bound on the  non-convex problem \\(\eqref{eq:main}\\), and as its objective always greater equal than zero, this implies that \\(s\\) together with fixed neuron parameters is a globally optimal solution to \\(\eqref{eq:main}\\). Again, such neural network would overfit the data beyond anything imaginable (recall the same scenario in the previous section).
 
-For the number of neurons in between 0 and \\(|X|\\) (size of the dataset) the values will be distributed in between \\( ||Y||\_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
+For the number of neurons in between 0 and \\(&#124;X&#124;\\) (size of the dataset) the values will be distributed in between \\( &#124;&#124;Y&#124;&#124;_2^2 \\) and 0 correspondingly. It is however not clear how "even" these values are distributed with respect to the number of neurons used.
 
 First, I show that adding extra neurons with fixed parameters to the network always improves the objective value, given that randomly initialized neurons satisfy a certain criterion (which happens with probability close to / almost 1, depending on the type of neuron), outlined below.
 
@@ -194,7 +194,7 @@ $$
   s' \\\\
   s 
 \end{array}
-\right) - Y||\_2^2
+\right) - Y||_2^2
 $$
 
 At the optimum of the L2 regression optimization problem it holds that:
